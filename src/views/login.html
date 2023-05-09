@@ -12,8 +12,7 @@
 <body>
 
 <div class="container">
-    <h2>Login Form</h2>
-    <form action="/login" method="post">
+    <h2>Login to Calendr.</h2>
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
@@ -23,8 +22,14 @@
             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" class="btn btn-primary">Don't have an account? - Sign up</button>
-    </form>
+        <button type="submit" class="btn btn-primary" id = "signup">Don't have an account? - Sign up</button>    
+        <script>
+            document.getElementById("signup").onclick = function() {loadSignUp()};
+            function loadSignUp() {
+                window.location.href = "/signup";
+            }
+        </script>
 </div>
 
 </body
+
