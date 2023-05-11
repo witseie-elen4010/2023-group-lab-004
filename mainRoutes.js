@@ -12,7 +12,7 @@ mainRouter.get('/signup', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'signup.html'))
 })
 
-mainRouter.get('/landing', function (req, res) {
+mainRouter.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'landing.html'))
 })
 
