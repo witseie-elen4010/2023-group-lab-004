@@ -36,6 +36,13 @@
                 window.location.href = "/dashboard";
             }
         </script>
+        <button type="submit" class="btn btn-primary" id = "consultdash">Consultation Dashboard</button>    
+        <script>
+            document.getElementById("consultdash").onclick = function() {loadDashboard()};
+            function loadDashboard() {
+                window.location.href = "/createconsulation";
+            }
+        </script>
 </div>
 
 </body
