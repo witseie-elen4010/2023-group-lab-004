@@ -38,11 +38,19 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <button type="submit" class="btn btn-primary" id = "CreateNewEvent">Create New Consultation Event</button>
+                        <script>
+                            document.getElementById("CreateNewEvent").onclick = function() {loadCreateEvent()};
+                            function loadCreateEvent() {
+                                window.location.href = "/createconsulation";
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Add Bootstrap and JavaScript dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
