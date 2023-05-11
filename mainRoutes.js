@@ -16,4 +16,11 @@ mainRouter.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'landing.html'))
 })
 
+mainRouter.get('/createconsulation', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'createConsultation.html'))
+})
+
+mainRouter.get('/dashboard', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'dashboard.html'))
+})
 module.exports = mainRouter
