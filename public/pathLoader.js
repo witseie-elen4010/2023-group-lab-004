@@ -11,3 +11,7 @@ function loadDashboard () {
 function loadSignUp () {
   window.location.href = '/signup'
 }
+
+function loadLogin () {
+  window.location.href = '/login'
+}
