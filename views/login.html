@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script defer src = "/cdn/login.js"></script>
 </head>
 <body>
 
@@ -22,27 +23,9 @@
             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" class="btn btn-primary" id = "signup">Don't have an account? - Sign up</button>    
-        <script>
-            document.getElementById("signup").onclick = function() {loadSignUp()};
-            function loadSignUp() {
-                window.location.href = "/signup";
-            }
-        </script>
-        <button type="submit" class="btn btn-primary" id = "dashboard">Dashboard</button>    
-        <script>
-            document.getElementById("dashboard").onclick = function() {loadDashboard()};
-            function loadDashboard() {
-                window.location.href = "/dashboard";
-            }
-        </script>
-        <button type="submit" class="btn btn-primary" id = "consultdash">Consultation Dashboard</button>    
-        <script>
-            document.getElementById("consultdash").onclick = function() {loadDashboard()};
-            function loadDashboard() {
-                window.location.href = "/createconsulation";
-            }
-        </script>
+        <button type="submit" class="btn btn-primary" onclick="loadSignUp()">Don't have an account? - Sign up</button>    
+        <button type="submit" class="btn btn-primary" onclick="loadDashboard()">Dashboard</button>    
+        <button type="submit" class="btn btn-primary" onclick="loadConsult()">Consultation Dashboard</button>    
 </div>
 
 </body
