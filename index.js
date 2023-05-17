@@ -6,6 +6,8 @@ const mainRouter = require('./mainRoutes')
 
 app.use('/', mainRouter)
 
+app.use('/cdn', express.static('public'))
+
 const port = process.env.PORT || 3000
 app.listen(port)
 console.log('Express server running on port 3000')
