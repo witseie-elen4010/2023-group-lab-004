@@ -1,3 +1,5 @@
+'use strict'
+
 document.getElementById('exampleModal').addEventListener('show.bs.modal', function () {
   const saveButton = this.querySelector('.modal-footer .btn-primary')
   saveButton.addEventListener('click', function () {
