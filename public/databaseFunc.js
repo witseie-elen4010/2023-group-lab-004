@@ -2,19 +2,14 @@
 
 const conn = require('../DBconn')
 const bcrypt = require('bcrypt')
-// IGNORE
+// Dont call directly
 function generateHashedPassword (password) {
   const salt = bcrypt.genSaltSync(10)
   const hash = bcrypt.hashSync(password, salt)
   return hash
 }
 
-function comparePasswords (password, hashedPassword) {
-  return bcrypt.compareSync(password, hashedPassword)
-}
-// End IGNORE
-
-// function to add a user to the database
+// function to add a user to the database, note that password is plaintext password!!!
 function createUser (email, name, surname, password, role) {
   const hashedPassword = generateHashedPassword(password)
   const sql = 'INSERT INTO users (email, name, surname, password, role) VALUES (?, ?, ?, ?, ?)'
@@ -43,6 +38,6 @@ function validateUser (email, password, callback) {
 }
 
 // validateUser is a callback function, has to be called like this
-validateUser('ahmad@test.com', 'password1234', function (isValid) {
-  console.log('Password is valid:', isValid)
-})
+// validateUser('ahmad@test.com', 'password1234', function (isValid) {
+//   console.log('Password is valid:', isValid)
+// })
