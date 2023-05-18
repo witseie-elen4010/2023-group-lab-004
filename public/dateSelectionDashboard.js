@@ -19,3 +19,5 @@ function filterConsultationSlots (date) {
     }
   }
 }
+
+module.exports = {filterConsultationSlots}
