@@ -14,4 +14,4 @@ const config =
 
 const pool = new mysql.createPool(config)
 
-module.exports = pool.promise()
+module.exports = pool

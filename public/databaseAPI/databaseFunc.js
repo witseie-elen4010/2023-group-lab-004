@@ -21,10 +21,27 @@ exports.createUser = function (user) {
   const hashedPassword = generateHashedPassword(user.password)
   const sql = 'INSERT INTO users (email, name, surname, password, role) VALUES (?, ?, ?, ?, ?)'
   const params = [user.email, user.name, user.surname, hashedPassword, user.role]
-  return new Promise(function (resolve, reject) {
-    conn.query(sql, params, function (err, results, fields) {
-      if (err) reject(err)
-      else resolve(results)
+  conn.query(sql, params, (err, results, fields) => {
+    if (err) throw err
+    else console.log('User added to database')
+  })
+}
+
+// Function to get all users from the database
+exports.getAllUsers = function () {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM users'
+    conn.execute(sql, (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('Users retrieved from database')
+        resolve(results)
+      }
     })
   })
+}
+
+exports.sendSomething = function () {
+  return 'something'
 }
