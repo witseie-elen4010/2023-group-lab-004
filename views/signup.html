@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Signup Page</title>
-  <script src="/cdn/signup.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script defer src = "/cdn/pathLoader.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/cdn/clientScripts/signup.js"></script>
 </head>
 
 <body>
-  <div class="container">
+  <div id='div' class="container">
     <h1>Signup</h1>
-    <form>
       <div class="form-group">
         <label for="firstName">First Name:</label>
         <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
@@ -35,14 +36,11 @@
       <div class="form-group">
         <label for="role">Role:</label><br>
         <label class="radio-inline">
-          <input type="radio" name="role" value="student" required>Student</label>
+          <input type="radio" name="role" value="student" required checked>Student</label>
         <label class="radio-inline">
           <input type="radio" name="role" value="lecturer" required>Lecturer</label>
       </div>
-      <button type="submit" class="btn btn-primary" onclick="loadLogin()">Signup</button>
-    </form>
+      <button type="submit" class="btn btn-primary" id="signUpButton" onclick="signUp()">Signup</button>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
