@@ -8,11 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script defer src = "/cdn/pathLoader.js"></script>
+    <script defer src = "/cdn/clientScripts/login.js"></script>
 </head>
 <body>
 
-<div class="container">
+<div id="div" class="container">
     <h2>Login to Calendr.</h2>
         <div class="form-group">
             <label for="email">Email:</label>
@@ -22,7 +22,7 @@
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="checkLogin()">Submit</button>
         <button type="submit" class="btn btn-primary" onclick="loadSignUp()">Don't have an account? - Sign up</button>    
         <button type="submit" class="btn btn-primary" onclick="loadDashboard()">Dashboard</button>    
         <button type="submit" class="btn btn-primary" onclick="loadConsult()">Consultation Dashboard</button>    

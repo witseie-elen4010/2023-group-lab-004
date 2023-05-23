@@ -42,6 +42,7 @@ exports.getAllUsers = function () {
   })
 }
 
+// Function to get a user from the database email is given in the post url as a parameter /posts/:email
 exports.getUser = function (email) {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM users WHERE email = ?'
@@ -50,8 +51,39 @@ exports.getUser = function (email) {
         reject(err)
       } else {
         console.log('User retrieved from database')
-        resolve(results)
+        resolve(JSON.stringify(results))
       }
     })
+  })
+}
+
+// Function to validate a user's password
+exports.validateUser = function (email, password) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT password FROM users WHERE email = ?'
+    conn.execute(sql, [email], (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        // check to ensure that the user exists
+        if (results.length === 0) {
+          resolve(false)
+        } else {
+          console.log('User retrieved from database')
+          const hashedPassword = results[0].password
+          const isValid = bcrypt.compareSync(password, hashedPassword)
+          resolve(isValid)
+        }
+      }
+    })
+  })
+}
+
+// Function to delete a user from the database
+exports.deleteUser = function (email) {
+  const sql = 'DELETE FROM users WHERE email = ?'
+  conn.execute(sql, [email], (err, results, fields) => {
+    if (err) throw err
+    else console.log('User deleted from database')
   })
 }

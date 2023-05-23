@@ -13,10 +13,15 @@ exports.getPost = async (req, res) => {
 
 exports.createPost = async (req, res, next) => {
   database.createUser(req.body)
-  console.log(req.body)
   res.send('createPost')
 }
 
 exports.deletePost = async (req, res) => {
+  database.deleteUser(req.params.id)
   res.send('deletePost')
+}
+
+exports.checkLogin = async (req, res) => {
+  const isValid = await database.validateUser(req.body.email, req.body.password)
+  res.send(isValid)
 }

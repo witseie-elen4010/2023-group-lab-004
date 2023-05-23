@@ -30,5 +30,6 @@ mainRouter
   .get(dbPosts.getAllPosts)
   .post(dbPosts.createPost)
 mainRouter.route('/posts/:id').get(dbPosts.getPost).delete(dbPosts.deletePost)
+mainRouter.route('/checkLogin').post(dbPosts.checkLogin)
 
 module.exports = mainRouter
