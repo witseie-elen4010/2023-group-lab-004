@@ -18,12 +18,18 @@ function generateHashedPassword (password) {
 //   role: 'role'
 // }
 exports.createUser = function (user) {
-  const hashedPassword = generateHashedPassword(user.password)
-  const sql = 'INSERT INTO users (email, name, surname, password, role) VALUES (?, ?, ?, ?, ?)'
-  const params = [user.email, user.name, user.surname, hashedPassword, user.role]
-  conn.query(sql, params, (err, results, fields) => {
-    if (err) throw err
-    else console.log('User added to database')
+  return new Promise((resolve, reject) => {
+    const hashedPassword = generateHashedPassword(user.password)
+    const sql = 'INSERT INTO users (email, name, surname, password, role) VALUES (?, ?, ?, ?, ?)'
+    const params = [user.email, user.name, user.surname, hashedPassword, user.role]
+    conn.execute(sql, params, (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('User added to database')
+        resolve(JSON.stringify(results))
+      }
+    })
   })
 }
 

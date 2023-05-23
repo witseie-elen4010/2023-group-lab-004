@@ -13,7 +13,7 @@ exports.getPost = async (req, res) => {
 
 exports.createPost = async (req, res, next) => {
   database.createUser(req.body)
-  res.send('createPost')
+  res.send('User added to database')
 }
 
 exports.deletePost = async (req, res) => {
