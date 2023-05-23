@@ -15,3 +15,4 @@ function loadLogin() {
     }
   }
   
+  module.exports = {loadLogin}

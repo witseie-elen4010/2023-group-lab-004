@@ -15,3 +15,5 @@ function loadSignUp () {
 function loadLogin () {
   window.location.href = '/login'
 }
+
+module.exports = {loadConsult, loadDashboard, loadLogin, loadSignUp}
