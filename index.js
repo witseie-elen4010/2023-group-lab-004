@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const mainRouter = require('./mainRoutes')
 
+app.use(express.json())
 app.use('/', mainRouter)
 
 app.use('/cdn', express.static('public'))
