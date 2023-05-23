@@ -2,12 +2,13 @@
 const database = require('./databaseFunc')
 
 exports.getAllPosts = async (req, res) => {
-  const thing = await database.getAllUsers()
-  res.send(thing)
+  const users = await database.getAllUsers()
+  res.send(users)
 }
 
 exports.getPost = async (req, res) => {
-  res.send('getPost')
+  const user = await database.getUser(req.params.id)
+  res.send(user)
 }
 
 exports.createPost = async (req, res, next) => {

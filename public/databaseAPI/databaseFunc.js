@@ -42,6 +42,16 @@ exports.getAllUsers = function () {
   })
 }
 
-exports.sendSomething = function () {
-  return 'something'
+exports.getUser = function (email) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM users WHERE email = ?'
+    conn.execute(sql, [email], (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('User retrieved from database')
+        resolve(results)
+      }
+    })
+  })
 }
