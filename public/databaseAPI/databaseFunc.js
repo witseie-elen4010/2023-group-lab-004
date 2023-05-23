@@ -42,7 +42,7 @@ exports.getAllUsers = function () {
   })
 }
 
-// Function to get a user from the database email is given in the post url as a parameter /posts/:email
+// Function to get a user from the database
 exports.getUser = function (email) {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM users WHERE email = ?'
