@@ -33,8 +33,7 @@ exports.createUser = function (user) {
           nature: 'New User Created',
           email: user.email
         }
-        console.log(JSON.stringify(action))
-        logTable.logAction(JSON.stringify(action))
+        logTable.logAction(action)
         console.log('User added to database')
         resolve(JSON.stringify(results))
       }
