@@ -1,6 +1,7 @@
 'use strict'
 
 const conn = require('../../db.js')
+const logTable = require('./logFunctions.js')
 const bcrypt = require('bcrypt')
 // Dont call directly
 function generateHashedPassword (password) {
@@ -26,6 +27,14 @@ exports.createUser = function (user) {
       if (err) {
         reject(err)
       } else {
+        const action = {
+          date: new Date().toISOString().slice(0, 10),
+          time: new Date().toISOString().slice(11, 19),
+          nature: 'New User Created',
+          email: user.email
+        }
+        console.log(JSON.stringify(action))
+        logTable.logAction(JSON.stringify(action))
         console.log('User added to database')
         resolve(JSON.stringify(results))
       }

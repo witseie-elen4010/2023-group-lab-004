@@ -27,8 +27,8 @@ mainRouter.get('/dashboard', function (req, res) {
 
 mainRouter
   .route('/posts')
-  .get(dbPosts.getAllPosts)
-  .post(dbPosts.createPost)
+  .get(dbPosts.getAllPosts) // get all users
+  .post(dbPosts.createPost) // add user
 mainRouter.route('/posts/:id').get(dbPosts.getPost).delete(dbPosts.deletePost)
 mainRouter.route('/checkLogin').post(dbPosts.checkLogin)
 
