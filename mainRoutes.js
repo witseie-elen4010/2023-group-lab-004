@@ -25,6 +25,10 @@ mainRouter.get('/dashboard', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'dashboard.html'))
 })
 
+mainRouter.get('/viewlogs', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'logs.html'))
+})
+
 mainRouter
   .route('/posts')
   .get(dbPosts.getAllPosts) // get all users
