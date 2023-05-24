@@ -33,6 +33,6 @@ exports.logAction = async (req, res) => {
 }
 
 exports.getAllLogs = async (req, res) => {
-  // const logs = await database.getAllLogs()
-  res.send('getLogs')
+  const logs = await logTable.getAllLogs()
+  res.send(logs)
 }
