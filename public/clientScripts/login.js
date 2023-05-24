@@ -38,12 +38,3 @@ async function checkLogin () {
 function loadSignUp () {
   window.location.href = '/signup'
 }
-
-// Delete these later
-function loadConsult () {
-  window.location.href = '/createconsulation'
-}
-
-function loadDashboard () {
-  window.location.href = '/dashboard'
-}
