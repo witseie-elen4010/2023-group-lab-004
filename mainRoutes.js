@@ -32,4 +32,10 @@ mainRouter
 mainRouter.route('/posts/:id').get(dbPosts.getPost).delete(dbPosts.deletePost)
 mainRouter.route('/checkLogin').post(dbPosts.checkLogin)
 
+// log all actions taken
+mainRouter
+  .route('/log')
+  .post(dbPosts.logAction)
+  .get(dbPosts.getAllLogs)
+
 module.exports = mainRouter

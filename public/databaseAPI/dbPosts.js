@@ -25,3 +25,13 @@ exports.checkLogin = async (req, res) => {
   const isValid = await database.validateUser(req.body.email, req.body.password)
   res.send(isValid)
 }
+
+exports.logAction = async (req, res) => {
+  // database.logAction(req.body)
+  res.send('logAction')
+}
+
+exports.getAllLogs = async (req, res) => {
+  // const logs = await database.getAllLogs()
+  res.send('getLogs')
+}
