@@ -20,8 +20,12 @@ async function checkLogin () {
     .then(data => {
     // Handle the response data
       console.log(data)
-      if (data === true) {
-        window.location.href = '/dashboard'
+      if (data.isValid === true) {
+        if (data.role === 'lecturer') {
+          window.location.href = `/dashboard/${data.email}`
+        } else {
+          window.location.href = `/dashboard/${data.email}`
+        }
       } else {
         const p = document.createElement('p')
         const text = document.createTextNode('Invalid email or password')

@@ -20,4 +20,4 @@ function filterConsultationSlots (date) {
   }
 }
 
-module.exports = {filterConsultationSlots}
+module.exports = { filterConsultationSlots }

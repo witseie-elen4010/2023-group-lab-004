@@ -74,21 +74,39 @@ exports.getUser = function (email) {
 // Function to validate a user's password
 exports.validateUser = function (email, password) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT password FROM users WHERE email = ?'
-    conn.execute(sql, [email], (err, results, fields) => {
-      if (err) {
-        reject(err)
-      } else {
-        // check to ensure that the user exists
-        if (results.length === 0) {
-          resolve(false)
+    const userData = new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM users WHERE email = ?'
+      conn.execute(sql, [email], (err, results, fields) => {
+        if (err) {
+          reject(err)
         } else {
           console.log('User retrieved from database')
-          const hashedPassword = results[0].password
-          const isValid = bcrypt.compareSync(password, hashedPassword)
-          resolve(isValid)
+          resolve(results)
         }
-      }
+      })
+    })
+    userData.then((user) => {
+      const sql = 'SELECT password FROM users WHERE email = ?'
+      conn.execute(sql, [email], (err, results, fields) => {
+        if (err) {
+          reject(err)
+        } else {
+        // check to ensure that the user exists
+          if (results.length === 0) {
+            resolve(false)
+          } else {
+            console.log('User retrieved from database')
+            const hashedPassword = results[0].password
+            const isValid = bcrypt.compareSync(password, hashedPassword)
+            const result = {
+              isValid,
+              email: user[0].email,
+              role: user[0].role
+            }
+            resolve(result)
+          }
+        }
+      })
     })
   })
 }

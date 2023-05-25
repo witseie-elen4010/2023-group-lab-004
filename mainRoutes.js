@@ -21,7 +21,7 @@ mainRouter.get('/createconsulation', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'createConsultation.html'))
 })
 
-mainRouter.get('/dashboard', function (req, res) {
+mainRouter.get('/dashboard/:id', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'dashboard.html'))
 })
 
