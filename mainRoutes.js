@@ -21,15 +21,29 @@ mainRouter.get('/createconsulation', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'createConsultation.html'))
 })
 
-mainRouter.get('/dashboard', function (req, res) {
-  res.sendFile(path.join(__dirname, 'views', 'dashboard.html'))
+mainRouter.get('/lecturerdashboard/:id', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'lecturerDashboard.html'))
+})
+
+mainRouter.get('/studentdashboard/:id', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'studentDashboard.html'))
+})
+
+mainRouter.get('/viewlogs', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'logs.html'))
 })
 
 mainRouter
   .route('/posts')
-  .get(dbPosts.getAllPosts)
-  .post(dbPosts.createPost)
+  .get(dbPosts.getAllPosts) // get all users
+  .post(dbPosts.createPost) // add user
 mainRouter.route('/posts/:id').get(dbPosts.getPost).delete(dbPosts.deletePost)
 mainRouter.route('/checkLogin').post(dbPosts.checkLogin)
+
+// log all actions taken
+mainRouter
+  .route('/log')
+  .post(dbPosts.logAction)
+  .get(dbPosts.getAllLogs)
 
 module.exports = mainRouter

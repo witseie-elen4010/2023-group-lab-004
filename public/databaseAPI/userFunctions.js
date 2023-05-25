@@ -1,6 +1,7 @@
 'use strict'
 
 const conn = require('../../db.js')
+const logTable = require('./logFunctions.js')
 const bcrypt = require('bcrypt')
 // Dont call directly
 function generateHashedPassword (password) {
@@ -26,6 +27,13 @@ exports.createUser = function (user) {
       if (err) {
         reject(err)
       } else {
+        const action = {
+          date: new Date().toISOString().slice(0, 10),
+          time: new Date().toISOString().slice(11, 19),
+          nature: 'New User Created',
+          email: user.email
+        }
+        logTable.logAction(action)
         console.log('User added to database')
         resolve(JSON.stringify(results))
       }
@@ -66,21 +74,39 @@ exports.getUser = function (email) {
 // Function to validate a user's password
 exports.validateUser = function (email, password) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT password FROM users WHERE email = ?'
-    conn.execute(sql, [email], (err, results, fields) => {
-      if (err) {
-        reject(err)
-      } else {
-        // check to ensure that the user exists
-        if (results.length === 0) {
-          resolve(false)
+    const userData = new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM users WHERE email = ?'
+      conn.execute(sql, [email], (err, results, fields) => {
+        if (err) {
+          reject(err)
         } else {
           console.log('User retrieved from database')
-          const hashedPassword = results[0].password
-          const isValid = bcrypt.compareSync(password, hashedPassword)
-          resolve(isValid)
+          resolve(results)
         }
-      }
+      })
+    })
+    userData.then((user) => {
+      const sql = 'SELECT password FROM users WHERE email = ?'
+      conn.execute(sql, [email], (err, results, fields) => {
+        if (err) {
+          reject(err)
+        } else {
+        // check to ensure that the user exists
+          if (results.length === 0) {
+            resolve(false)
+          } else {
+            console.log('User retrieved from database')
+            const hashedPassword = results[0].password
+            const isValid = bcrypt.compareSync(password, hashedPassword)
+            const result = {
+              isValid,
+              email: user[0].email,
+              role: user[0].role
+            }
+            resolve(result)
+          }
+        }
+      })
     })
   })
 }
