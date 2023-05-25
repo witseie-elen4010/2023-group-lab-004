@@ -20,8 +20,12 @@ async function checkLogin () {
     .then(data => {
     // Handle the response data
       console.log(data)
-      if (data === true) {
-        window.location.href = '/dashboard'
+      if (data.isValid === true) {
+        if (data.role === 'lecturer') {
+          window.location.href = `/lecturerdashboard/${data.email}`
+        } else {
+          window.location.href = `/studentdashboard/${data.email}`
+        }
       } else {
         const p = document.createElement('p')
         const text = document.createTextNode('Invalid email or password')
@@ -37,13 +41,4 @@ async function checkLogin () {
 
 function loadSignUp () {
   window.location.href = '/signup'
-}
-
-// Delete these later
-function loadConsult () {
-  window.location.href = '/createconsulation'
-}
-
-function loadDashboard () {
-  window.location.href = '/dashboard'
 }
