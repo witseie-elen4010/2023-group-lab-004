@@ -10,8 +10,39 @@
 </head>
 
 <body>
+    <div class="modal fade" id="createEventModal" tabindex="-1" aria-labelledby="createEventModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createEventModalLabel">Create Consultation Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="eventDate" class="form-label">Event Date</label>
+                            <input type="date" class="form-control" id="eventDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventTime" class="form-label">Event Time</label>
+                            <select class="form-select" id="eventTime">
+                                <!-- Available event times for the selected date must be displayed here. If max number of students already at capacity, do not display -->
+                                <option value="">Select consultation</option>
+                                <option value="09:00">09:00 AM with S. Levitt</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Join</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container my-5">
-        <h1 class="my-4">Students Dashboard</h1>
+        <h1 class="my-4">Student Dashboard</h1>
     </div>
 
     <div class="card">
@@ -43,6 +74,10 @@
         </div>
 
     </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+        Join Consultation
+    </button>
     <script defer src="../cdn/clientScripts/calendarControl.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
