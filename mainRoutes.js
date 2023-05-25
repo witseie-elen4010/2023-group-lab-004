@@ -21,8 +21,12 @@ mainRouter.get('/createconsulation', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'createConsultation.html'))
 })
 
-mainRouter.get('/dashboard/:id', function (req, res) {
-  res.sendFile(path.join(__dirname, 'views', 'dashboard.html'))
+mainRouter.get('/lecturerdashboard/:id', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'lecturerDashboard.html'))
+})
+
+mainRouter.get('/studentdashboard/:id', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'studentDashboard.html'))
 })
 
 mainRouter.get('/viewlogs', function (req, res) {

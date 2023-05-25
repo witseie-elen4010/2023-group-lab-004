@@ -22,9 +22,9 @@ async function checkLogin () {
       console.log(data)
       if (data.isValid === true) {
         if (data.role === 'lecturer') {
-          window.location.href = `/dashboard/${data.email}`
+          window.location.href = `/lecturerdashboard/${data.email}`
         } else {
-          window.location.href = `/dashboard/${data.email}`
+          window.location.href = `/studentdashboard/${data.email}`
         }
       } else {
         const p = document.createElement('p')
