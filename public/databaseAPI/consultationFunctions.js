@@ -1,6 +1,7 @@
 'use strict'
 
 const conn = require('../../db.js')
+const logTable = require('./logFunctions.js')
 
 // Get all consultations for a lecturer
 exports.getAllConsultations = function (email) {
@@ -28,6 +29,13 @@ exports.addConsultation = function (user) {
         reject(err)
       } else {
         console.log('Consultation added to database')
+        const action = {
+          date: new Date().toISOString().slice(0, 10),
+          time: new Date().toISOString().slice(11, 19),
+          nature: 'New Consultation Created',
+          email: user.email
+        }
+        logTable.logAction(action)
         resolve(JSON.stringify(results))
       }
     })
