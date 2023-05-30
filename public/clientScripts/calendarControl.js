@@ -17,6 +17,11 @@ const events = [
   { date: '2023-05-20', title: 'Event 3' }
 ]
 
+// function to move to the joinConsultation page
+function joinConsultation() {
+  window.location.href = '/joinConsultation'
+}
+
 // Function to generate the calendar
 function generateCalendar(month, year) {
   // Clear the calendar body
@@ -105,6 +110,7 @@ nextMonthBtn.addEventListener('click', function () {
   generateCalendar(currentMonth, currentYear)
 })
 
+
 // Event listener for today button
 const todayBtn = document.getElementById('todayBtn')
 todayBtn.addEventListener('click', function () {
@@ -117,3 +123,7 @@ todayBtn.addEventListener('click', function () {
   // Update the calendar to the current month and year
   generateCalendar(currentMonth, currentYear)
 })
+
+function loadLogPage() {
+  window.location.href = '/viewlogs'
+}

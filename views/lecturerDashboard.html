@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script defer src="/cdn/pathLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script defer src="../cdn/clientScripts/calendarControl.js"></script>
+    <script defer src="../cdn/clientScripts/lecturerDashboard.js"></script>
+    
 </head>
 
 <body>
@@ -39,19 +43,21 @@
                         </div>
                         <div class="mb-3">
                             <label for="maxStudents" class="form-label">Maximum Number of Students</label>
-                            <input type="number" class="form-control" id="maxStudents" min="1"
-                                placeholder="Enter maximum number of students">
+                            <input type="number" class="form-control" id="maxStudents" min="1" placeholder="Enter maximum number of students">
                         </div>
-                        <button type="submit" class="btn btn-primary">Create Event</button>
+                        <div id="modalBtnDiv">
+                            <button type="button" class="btn btn-primary" onclick="addConsultation()" id="btnAdd">Create Event</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container my-5">
-        <h1 class="my-4">Lecturers Dashboard</h1>
+    <div class="container my-5" id="greeting">
+        <h1 class="my-4" id="heading">Lecturers Dashboard</h1>
     </div>
+<<<<<<< HEAD
 
     <div class="card">
         <div class="container">
@@ -83,16 +89,44 @@
                     </tbody>
                 </table>
             </div>
+=======
+    <div class="container">
+        <h1>Calendar</h1>
+        <div class="text-center mb-3">
+            <button id="prevMonthBtn" class="btn btn-primary mr-2">&lt; Prev Month</button>
+            <span id="currentMonth"></span>
+            <button id="nextMonthBtn" class="btn btn-primary ml-2">Next Month &gt;</button>
         </div>
-
+        <div class="card">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody id="calendarBody">
+                    <!-- Calendar body will be dynamically generated here -->
+                </tbody>
+            </table>
+>>>>>>> abfc7f007420ae8e16cf75d0878c44d0f8f6a633
+        </div>
     </div>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
-        Create Consultation
-    </button>
-    <script defer src="../cdn/clientScripts/calendarControl.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <div class="container">
+        <p> </p>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+            Create Consultation
+        </button>
+        <button type="button" class="btn btn-primary" onclick="loadConsultView()">Manage my consultations</button>
+        <button type="button" class="btn btn-primary" onclick="loadLogPage()">View Calendr. action log</button>
+        <p> </p>
+    </div>
 </body>
 
 </html>

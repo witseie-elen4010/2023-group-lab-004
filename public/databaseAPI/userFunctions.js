@@ -95,14 +95,25 @@ exports.validateUser = function (email, password) {
           if (results.length === 0) {
             resolve(false)
           } else {
-            console.log('User retrieved from database')
             const hashedPassword = results[0].password
             const isValid = bcrypt.compareSync(password, hashedPassword)
             const result = {
               isValid,
               email: user[0].email,
-              role: user[0].role
+              role: user[0].role,
+              name: user[0].name,
+              surname: user[0].surname
             }
+            // log sign in action
+            const action = {
+              date: new Date().toISOString().slice(0, 10),
+              time: new Date().toISOString().slice(11, 19),
+              nature: 'User Signed In',
+              email: user[0].email
+            }
+            logTable.logAction(action)
+            // return the result
+            console.log('User retrieved from database')
             resolve(result)
           }
         }
