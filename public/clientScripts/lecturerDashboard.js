@@ -12,7 +12,7 @@ async function fetchLecturerDetails () {
 
 async function displayGreeting () {
   const lecturer = await fetchLecturerDetails()
-  const h = document.getElementById("heading")
+  const h = document.getElementById('heading')
   h.innerHTML = `Lecturer Dashboard - ${lecturer.Name}`
 }
 
@@ -61,6 +61,12 @@ async function addConsultation () {
       console.error('Error:', error)
     }
     )
+}
+
+function loadConsultView () {
+  const url = window.location.href
+  const id = url.substring(url.lastIndexOf('/') + 1)
+  window.location.href = `/myConsultations/${id}`
 }
 
 displayGreeting()
