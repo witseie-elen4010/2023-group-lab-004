@@ -1,6 +1,7 @@
 'use strict'
 const userTable = require('./userFunctions')
 const logTable = require('./logFunctions')
+const consultationTable = require('./consultationFunctions')
 
 exports.getAllPosts = async (req, res) => {
   const users = await userTable.getAllUsers()
@@ -35,4 +36,19 @@ exports.logAction = async (req, res) => {
 exports.getAllLogs = async (req, res) => {
   const logs = await logTable.getAllLogs()
   res.send(logs)
+}
+
+exports.addConsultation = async (req, res) => {
+  const consultation = await consultationTable.addConsultation(req.body)
+  res.send(consultation)
+}
+
+exports.getConsultations = async (req, res) => {
+  const consultations = await consultationTable.getAllConsultations(req.body.email)
+  res.send(consultations)
+}
+
+exports.cancelConsultation = async (req, res) => {
+  const consultation = await consultationTable.cancelConsultation(req.body.id)
+  res.send(consultation)
 }

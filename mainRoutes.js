@@ -46,4 +46,8 @@ mainRouter
   .post(dbPosts.logAction)
   .get(dbPosts.getAllLogs)
 
+// consultation routes
+mainRouter.route('/addConsultation').post(dbPosts.addConsultation)
+mainRouter.route('/getConsultations').post(dbPosts.getConsultations)
+
 module.exports = mainRouter
