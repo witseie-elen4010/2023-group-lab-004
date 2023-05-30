@@ -33,6 +33,10 @@ mainRouter.get('/viewlogs', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'logs.html'))
 })
 
+mainRouter.get('/myConsultations/:id', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'myConsultations.html'))
+})
+
 mainRouter
   .route('/posts')
   .get(dbPosts.getAllPosts) // get all users
@@ -45,5 +49,9 @@ mainRouter
   .route('/log')
   .post(dbPosts.logAction)
   .get(dbPosts.getAllLogs)
+
+// consultation routes
+mainRouter.route('/addConsultation').post(dbPosts.addConsultation)
+mainRouter.route('/getConsultations').post(dbPosts.getConsultations)
 
 module.exports = mainRouter
