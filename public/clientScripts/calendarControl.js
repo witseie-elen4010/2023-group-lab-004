@@ -1,5 +1,5 @@
 // Get current date
-const currentDate = new Date()
+let currentDate = new Date()
 
 // Initialize month and year variables
 let currentMonth = currentDate.getMonth()
@@ -18,12 +18,12 @@ const events = [
 ]
 
 // function to move to the joinConsultation page
-function joinConsultation () {
+function joinConsultation() {
   window.location.href = '/joinConsultation'
 }
 
 // Function to generate the calendar
-function generateCalendar (month, year) {
+function generateCalendar(month, year) {
   // Clear the calendar body
   const calendarBody = document.getElementById('calendarBody')
   calendarBody.innerHTML = ''
@@ -110,6 +110,20 @@ nextMonthBtn.addEventListener('click', function () {
   generateCalendar(currentMonth, currentYear)
 })
 
-function loadLogPage () {
+
+// Event listener for today button
+const todayBtn = document.getElementById('todayBtn')
+todayBtn.addEventListener('click', function () {
+  currentDate = new Date()
+
+  // Get the month and year of the current date
+  currentMonth = currentDate.getMonth()
+  currentDate.getFullYear()
+
+  // Update the calendar to the current month and year
+  generateCalendar(currentMonth, currentYear)
+})
+
+function loadLogPage() {
   window.location.href = '/viewlogs'
 }
