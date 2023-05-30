@@ -49,7 +49,11 @@ function createTable (data) {
   })
   table.appendChild(tbody)
 
-  tableContainer.appendChild(table)
+  const tableWrapper = document.createElement('div')
+  tableWrapper.classList.add('table-wrapper')
+  tableWrapper.appendChild(table)
+
+  tableContainer.appendChild(tableWrapper)
 }
 
 // Call the function to fetch logs and create the table
@@ -57,5 +61,5 @@ fetchLogsAndCreateTable()
 
 // return to previous page
 function goBack () {
-  window.location.href = '/login'
+  window.history.back()
 }
