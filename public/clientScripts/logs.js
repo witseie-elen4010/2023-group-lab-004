@@ -57,5 +57,5 @@ fetchLogsAndCreateTable()
 
 // return to previous page
 function goBack () {
-  window.location.href = '/login'
+  window.history.back()
 }
