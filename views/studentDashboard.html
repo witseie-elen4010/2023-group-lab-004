@@ -13,44 +13,51 @@
     <script defer src="/cdn/clientScripts/calendarControl.js"></script>
     
 </head>
-
+<!-- modal for selecting the lecturer (defunct)-->
 <body>
-    <div class="modal fade" id="createEventModal" tabindex="-1" aria-labelledby="createEventModalLabel"
+    
+    <!-- Modal for selecting lecturer and joining consult -->
+    
+
+    <div class="modal fade" id="TableModal" tabindex="-1" aria-labelledby="createEventModalTable"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createEventModalLabel">Join Consultation</h5>
+                    <h5 class="modal-title" id="createEventModalTable">Join Consultation Event</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
                             <label for="eventLecturer" class="form-label">Lecturer</label>
-                            <select class="form-select" id="eventLecturer">
-                                <option value="">Select lecturer</option>
-                                <option value="Software">S. Levitt</option>
-                                <option value="Measurements">AK Mohamed</option>
-                                <option value="Big data">T. Celik</option>
+                            <select class="form-select" id="eventLecturer" onchange="createTable()">
+                                <!-- dynamically generate dropdown fields here -->
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="eventTime" class="form-label">Event Time</label>
-                            <select class="form-select" id="eventTime">
-                                <!-- Available event times for the selected date must be displayed here. If max number of students already at capacity, do not display -->
-                                <option value="">Select consultation</option>
-                                <option value="09:00">09:00 AM with S. Levitt</option>
-                                <option value="10:00">10:00 AM</option>
-                                <option value="11:00">11:00 AM</option>
-                            </select>
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="eventTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Lecturer</th>
+                                            <th>Time</th>
+                                            <th>Spaces Available</th>
+                                            <th>Join</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+                                        <!-- Table rows will be dynamically generated here -->
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Join</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="container my-5" id="greeting">
         <h1 class="my-4">Student Dashboard</h1>
     </div>
@@ -88,7 +95,7 @@
 
     </div>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#TableModal">
         Join Consultation
     </button>
     <script defer src="../cdn/clientScripts/calendarControl.js"></script>
