@@ -21,8 +21,16 @@
 
 <body>
   <div id='div' class="container">
-    <img src="/cdn/resources/company-logo.png" alt="Company Logo" height="50">
-    <h1>Signup</h1>
+    <div class="container my-5" id="greeting">
+      <div class="row align-items-center">
+          <div class="col-auto">
+              <img src="/cdn/resources/company-logo.png" alt="Company Logo" height="80">
+          </div>
+          <div class="col">
+              <h1>Sign up for Calendr.</h1>
+          </div>
+      </div>
+  </div>
       <div class="form-group">
         <label for="firstName">First Name:</label>
         <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
@@ -50,7 +58,7 @@
         <label class="radio-inline">
           <input type="radio" name="role" value="lecturer" required>Lecturer</label>
       </div>
-      <button type="submit" class="btn btn-purple" id="signUpButton" onclick="signUp()">Signup</button>
+      <button type="button" class="btn btn-purple" id="signUpButton" onclick="signUp()">Sign up</button>
   </div>
 </body>
 </html>
