@@ -13,45 +13,10 @@
     <script defer src="/cdn/clientScripts/calendarControl.js"></script>
     
 </head>
-<!-- modal for selecting the lecturer -->
+<!-- modal for selecting the lecturer (defunct)-->
 <body>
-    <div class="modal fade" id="createEventModal" tabindex="-1" aria-labelledby="createEventModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createEventModalLabel">Join Consultation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="eventLecturer" class="form-label">Lecturer</label>
-                            <select class="form-select" id="eventLecturer">
-                                <option value="">Select lecturer</option>
-                                <option value="Software">S. Levitt</option>
-                                <option value="Measurements">AK Mohamed</option>
-                                <option value="Big data">T. Celik</option>
-                            </select>
-                        </div>
-                        <!-- <div class="mb-3">
-                            <label for="eventTime" class="form-label">Event Time</label>
-                            <select class="form-select" id="eventTime">
-                                Available event times for the selected date must be displayed here. If max number of students already at capacity, do not display -->
-                                <!-- <option value="">Select consultation</option>
-                                <option value="09:00">09:00 AM with S. Levitt</option>
-                                <option value="10:00">10:00 AM</option>
-                                <option value="11:00">11:00 AM</option>
-                            </select>
-                        </div> -->
-                        
-                        <button type="submit" class="btn btn-primary">Select</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Test script -->
+    
+    <!-- Modal for selecting lecturer and joining consult -->
     
 
     <div class="modal fade" id="TableModal" tabindex="-1" aria-labelledby="createEventModalTable"
@@ -65,6 +30,12 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
+                            <label for="eventLecturer" class="form-label">Lecturer</label>
+                            <select class="form-select" id="eventLecturer" onclick="createTable()">
+                                <!-- dynamically generate dropdown fields here -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <div class="table-responsive">
                                 <table class="table table-striped" id="eventTable">
                                     <thead>
@@ -77,51 +48,7 @@
                                     </thead>
                                     <tbody id="tableBody">
                                         <!-- Table rows will be dynamically generated here -->
-                                        <script>
-                                            // Sample data array
-                                            const dataArray = [
-                                                { column1: 'Value 1', column2: 'Value 2', column3: 'Value 3' },
-                                                { column1: 'Value 4', column2: 'Value 5', column3: 'Value 6' }
-                                            ];
-                                        
-                                            // Function to create and populate the table
-                                            function createTable(data) {
-                                                const tableBody = document.getElementById('tableBody');
-                                        
-                                                // Clear existing table rows
-                                                tableBody.innerHTML = '';
-                                        
-                                                // Create new table rows
-                                                data.forEach((rowObj, index) => {
-                                                    const row = document.createElement('tr');
-                                                    Object.values(rowObj).forEach(value => {
-                                                        const cell = document.createElement('td');
-                                                        cell.textContent = value;
-                                                        row.appendChild(cell);
-                                                    });
-                                                
-                                                // Create the "Join" button for the 4th column
-                                                    const joinButtonCell = document.createElement('td');
-                                                    const joinButton = document.createElement('button');
-                                                    joinButton.textContent = 'Join';
-                                                    joinButton.classList.add('btn', 'btn-primary');
-                                                    joinButtonCell.appendChild(joinButton);
-                                                    row.appendChild(joinButtonCell);
-                                        
-                                                    // Add click event listener to highlight selected row
-                                                    row.addEventListener('click', () => {
-                                                        const selectedRows = document.querySelectorAll('.selected-row');
-                                                        selectedRows.forEach(row => row.classList.remove('selected-row'));
-                                                        row.classList.add('selected-row');
-                                                    });
-                                        
-                                                    tableBody.appendChild(row);
-                                                });
-                                            }
-                                        
-                                            // Call the function to create the table with the sample data
-                                            createTable(dataArray);
-                                        </script>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -168,9 +95,6 @@
 
     </div>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
-        Select Lecturer
-    </button>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#TableModal">
         Join Consultation
     </button>
