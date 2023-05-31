@@ -2,6 +2,7 @@
 const userTable = require('./userFunctions')
 const logTable = require('./logFunctions')
 const consultationTable = require('./consultationFunctions')
+const bookingTable = require('./bookingsFunctions')
 
 exports.getAllPosts = async (req, res) => {
   const users = await userTable.getAllUsers()
@@ -51,4 +52,9 @@ exports.getConsultations = async (req, res) => {
 exports.cancelConsultation = async (req, res) => {
   const consultation = await consultationTable.cancelConsultation(req.body.id)
   res.send(consultation)
+}
+
+exports.addBooking = async (req, res) => {
+  const booking = await bookingTable.addBooking(req.body.studentEmail, req.body.meetingID)
+  res.send(booking)
 }
