@@ -1,5 +1,7 @@
 'use strict'
 
+let lecturers = []
+
 // fetch signed in student's details
 async function fetchStudentDetails () {
   const url = window.location.href
@@ -25,7 +27,7 @@ const data = [
 // Function to populate the lecturer dropdown
 async function populateLecturerDropdown () {
   const result = await fetch('/getLecturers')
-  const lecturers = await result.json()
+  lecturers = await result.json()
   console.log(lecturers)
 
   const lecturerDropdown = document.getElementById('eventLecturer')
@@ -44,21 +46,47 @@ async function populateLecturerDropdown () {
 }
 
 // Function to create and populate the table
-function createTable () {
+async function createTable () {
+  // Get lecturer name from drop down
+  const lecturerDropdown = document.getElementById('eventLecturer')
+  const lecturerName = lecturerDropdown.options[lecturerDropdown.selectedIndex].value
+
+  // Get lecturer email from the array
+  const lectName = lecturerName.split(' ')
+  const lectSurname = lectName[1]
+  const lectEmail = lecturers.find(lecturer => lecturer.Surname === lectSurname).email
+  console.log(lectEmail)
   const tableBody = document.getElementById('tableBody')
+
+  // Get the consultations that match the selected lecturer
+  const result = await fetch('/getConsultations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email: lectEmail })
+  })
+  const consultations = await result.json()
+  console.log(consultations)
 
   // Clear existing table rows
   tableBody.innerHTML = ''
 
   // Create new table rows
-  data.forEach((rowObj, index) => {
+  consultations.forEach((rowObj, index) => {
     const row = document.createElement('tr')
-    Object.values(rowObj).forEach(value => {
+    const properties = ['meeting_title', 'date', 'time', 'duration']
+    properties.forEach(property => {
       const cell = document.createElement('td')
-      cell.textContent = value
+      if (property === 'date') {
+        const date = new Date(rowObj[property])
+        const formattedDate = date.toISOString().split('T')[0]
+        cell.textContent = formattedDate
+      } else {
+        cell.textContent = rowObj[property]
+      }
       row.appendChild(cell)
     })
-
     // Create the "Join" button for the 4th column
     const joinButtonCell = document.createElement('td')
     const joinButton = document.createElement('button')

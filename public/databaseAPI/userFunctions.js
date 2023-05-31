@@ -134,7 +134,7 @@ exports.deleteUser = function (email) {
 // Function to get all lecturers from the database
 exports.getAllLecturers = function () {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT Name, Surname FROM users WHERE role = "lecturer"'
+    const sql = 'SELECT Name, Surname, email FROM users WHERE role = "lecturer"'
     conn.execute(sql, (err, results, fields) => {
       if (err) {
         reject(err)
