@@ -24,10 +24,12 @@
             background-color: purple;
             color: white;
         }
+
         .btn-red {
             background-color: red;
             color: white;
         }
+
         body {
             background-image: url('../cdn/resources/purpleWaterCol.jpg');
         }
@@ -79,41 +81,41 @@
 
     <!-- Modal for managing consultations -->
     <div class="modal fade" id="manageConsultationsModal" tabindex="-1" aria-labelledby="manageConsultationsModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="manageConsultationsModalLabel">Manage Consultations</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="eventTable">
-                                <thead>
-                                    <tr>
-                                        <th>Students</th>
-                                        <th>Time</th>
-                                        <th>Spaces Available</th>
-                                        <th>Cancel</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableBody">
-                                    <!-- Table rows will be dynamically generated here -->
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="manageConsultationsModalLabel">Manage Consultations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="eventTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Students</th>
+                                            <th>Time</th>
+                                            <th>Spaces Available</th>
+                                            <th>Cancel</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+                                        <!-- Table rows will be dynamically generated here -->
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-purple">Save changes</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-purple">Save changes</button>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
 
@@ -127,35 +129,35 @@
             </div>
         </div>
     </div>
-        <div class="container">
-            <div class="text-center mb-1">
-                <button id="todayBtn" class="btn btn-purple mr-2">Today</button>
-            </div>
-            <div class="text-center mb-3">
-                <button id="prevMonthBtn" class="btn btn-purple mr-2">&lt; Prev Month</button>
-                <span id="currentMonth"></span>
-                <button id="nextMonthBtn" class="btn btn-purple ml-2">Next Month &gt;</button>
-            </div>
-
-            <div class="card">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </tr>
-                    </thead>
-                    <tbody id="calendarBody">
-                        <!-- Calendar body will be dynamically generated here -->
-                    </tbody>
-                </table>
-            </div>
+    <div class="container">
+        <div class="text-center mb-1">
+            <button id="todayBtn" class="btn btn-purple mr-2">Today</button>
         </div>
+        <div class="text-center mb-3">
+            <button id="prevMonthBtn" class="btn btn-purple mr-2">&lt; Prev Month</button>
+            <span id="currentMonth"></span>
+            <button id="nextMonthBtn" class="btn btn-purple ml-2">Next Month &gt;</button>
+        </div>
+
+        <div class="card">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody id="calendarBody">
+                    <!-- Calendar body will be dynamically generated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
     <!-- Button trigger modal -->
     <div class="container">
         <p> </p>
@@ -166,7 +168,6 @@
         <button type="button" class="btn btn-purple" data-bs-toggle="modal" data-bs-target="#manageConsultationsModal">
             Manage Consultations
         </button>
-        <button type="button" class="btn btn-purple" onclick="loadLogPage()">View Calendr. action log</button>
         <p> </p>
     </div>
 </body>

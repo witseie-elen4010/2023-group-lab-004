@@ -4,7 +4,7 @@ const {
   loadDashboard,
   loadSignUp,
   loadLogin
-} = require('./pathLoader')
+} = require('../pathLoader')
 
 describe('Test loadConsult', () => {
   it('should navigate to "/createconsulation"', () => {
