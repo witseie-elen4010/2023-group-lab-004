@@ -97,7 +97,7 @@ function createTable() {
       const cancelButtonCell = document.createElement('td');
       const cancelButton = document.createElement('button');
       cancelButton.textContent = 'Cancel';
-      cancelButton.classList.add('btn', 'btn-primary');
+      cancelButton.classList.add('btn', 'btn-red');
       cancelButtonCell.appendChild(cancelButton);
       row.appendChild(cancelButtonCell);
 
