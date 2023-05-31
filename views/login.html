@@ -9,6 +9,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script defer src = "/cdn/clientScripts/login.js"></script>
+    <style>
+        .btn-purple {
+            background-color: purple;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <div id="div" class="container">
@@ -21,8 +27,8 @@
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
         </div>
-        <button type="submit" class="btn btn-primary" onclick="checkLogin()">Submit</button>
-        <button type="submit" class="btn btn-primary" onclick="loadSignUp()">Don't have an account? - Sign up</button>         
+        <button type="submit" class="btn btn-purple" onclick="checkLogin()">Submit</button>
+        <button type="submit" class="btn btn-purple" onclick="loadSignUp()">Don't have an account? - Sign up</button>         
 </div>
 </body>
 </html>
