@@ -95,11 +95,31 @@ async function createTable () {
     joinButtonCell.appendChild(joinButton)
     row.appendChild(joinButtonCell)
 
-    // Add click event listener to highlight selected row
-    row.addEventListener('click', () => {
-      const selectedRows = document.querySelectorAll('.selected-row')
-      selectedRows.forEach(row => row.classList.remove('selected-row'))
-      row.classList.add('selected-row')
+    // Add click event listener to join button
+    joinButton.addEventListener('click', (event) => {
+      event.preventDefault()
+
+      // Hide the button
+      joinButton.style.display = 'none'
+
+      // Create a new element for the "Joined" message
+      const joinedMessage = document.createElement('span')
+      joinedMessage.textContent = 'Joined'
+
+      // Append the "Joined" message to the button cell
+      joinButtonCell.appendChild(joinedMessage)
+
+      // Access the parent row of the clicked button
+      const parentRow = joinButton.closest('tr')
+
+      // Extract information from the parent row
+      const title = parentRow.cells[0].textContent
+      const date = parentRow.cells[1].textContent
+      const time = parentRow.cells[2].textContent
+      const duration = parentRow.cells[3].textContent
+
+      // Perform actions based on the extracted information
+      console.log(`Joining ${title} on ${date} at ${time} for ${duration}`)
     })
 
     tableBody.appendChild(row)
