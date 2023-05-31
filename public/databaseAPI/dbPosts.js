@@ -52,3 +52,8 @@ exports.cancelConsultation = async (req, res) => {
   const consultation = await consultationTable.cancelConsultation(req.body.id)
   res.send(consultation)
 }
+
+exports.getAllConsultations = async (req, res) => {
+  const consultations = await consultationTable.getAllPlannedConsultations()
+  res.send(consultations)
+}

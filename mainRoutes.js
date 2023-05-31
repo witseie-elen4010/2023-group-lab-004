@@ -53,5 +53,6 @@ mainRouter
 // consultation routes
 mainRouter.route('/addConsultation').post(dbPosts.addConsultation)
 mainRouter.route('/getConsultations').post(dbPosts.getConsultations)
+mainRouter.route('/getAllConsultations').get(dbPosts.getAllConsultations)
 
 module.exports = mainRouter

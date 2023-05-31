@@ -22,6 +22,24 @@ function joinConsultation() {
   window.location.href = '/joinConsultation'
 }
 
+async function fetchConsultationsAndCreateCalendar() {
+  try {
+    const response = await fetch('/getAllConsultations')
+    const data = await response.json()
+
+    // data.forEach(obj => {
+    //   const date = new Date(obj.date)
+    //   const localDate = date.toISOString().slice(0, 10)
+    //   obj.date = localDate
+    // })
+
+    console.log(data)
+    // createTable(data)
+  } catch (error) {
+    console.error('Error:', error)
+  }
+}
+
 // Function to generate the calendar
 function generateCalendar(month, year) {
   // Clear the calendar body

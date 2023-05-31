@@ -56,3 +56,18 @@ exports.cancelConsultation = function (id) {
     })
   })
 }
+
+// function to get all planned consultations from the database
+exports.getAllPlannedConsultations = function () {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM consultations'
+    conn.execute(sql, (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('Consultations retrieved from database')
+        resolve(results)
+      }
+    })
+  })
+}
