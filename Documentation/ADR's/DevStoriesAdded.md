@@ -8,4 +8,5 @@
 
 ### Sprint 4
 - Dev Story added to add today button so that user can change current month view to todays month.
+- Dev Story added to allow admin user to login and view logs
 
