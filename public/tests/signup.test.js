@@ -1,4 +1,4 @@
-const { loadLogin } = require('./oldSignup')
+const { loadLogin } = require('../oldSignup')
 
 describe('Test the loadLogin function', () => {
   beforeEach(() => {
