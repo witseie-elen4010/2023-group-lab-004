@@ -52,6 +52,11 @@ mainRouter
 
 // consultation routes
 mainRouter.route('/addConsultation').post(dbPosts.addConsultation)
-mainRouter.route('/getConsultations').post(dbPosts.getConsultations)
+mainRouter.route('/getConsultations').post(dbPosts.getConsultations) // get all consultations for a lecturer
+mainRouter.route('/getAllConsultations').get(dbPosts.getAllConsultations)
+
+// booking routes
+mainRouter.route('/addBooking').post(dbPosts.addBooking)
+mainRouter.route('/getStudentConsultations').post(dbPosts.getStudentConsultations) // get all bookings for a student
 
 module.exports = mainRouter

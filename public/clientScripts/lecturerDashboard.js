@@ -80,34 +80,34 @@ displayGreeting()
 const data = [
   { column1: 'Value 1', column2: 'Value 2', column3: 'Value 3' },
   { column1: 'Value 4', column2: 'Value 5', column3: 'Value 6' }
-];
+]
 
 // Function to create and populate the table
-function createTable() {
-  const tableBody = document.getElementById("tableBody");
+function createTable () {
+  const tableBody = document.getElementById('tableBody')
 
   // Clear existing table rows
-  tableBody.innerHTML = '';
+  tableBody.innerHTML = ''
 
   // Create new table rows
   data.forEach((rowObj, index) => {
-      const row = document.createElement('tr');
-      Object.values(rowObj).forEach(value => {
-          const cell = document.createElement('td');
-          cell.textContent = value;
-          row.appendChild(cell);
-      });
-  
-  // Create the "cancel" button for the 4th column
-      const cancelButtonCell = document.createElement('td');
-      const cancelButton = document.createElement('button');
-      cancelButton.textContent = 'Cancel';
-      cancelButton.classList.add('btn', 'btn-red');
-      cancelButtonCell.appendChild(cancelButton);
-      row.appendChild(cancelButtonCell);
+    const row = document.createElement('tr')
+    Object.values(rowObj).forEach(value => {
+      const cell = document.createElement('td')
+      cell.textContent = value
+      row.appendChild(cell)
+    })
 
-      tableBody.appendChild(row);
-  });
+    // Create the "cancel" button for the 4th column
+    const cancelButtonCell = document.createElement('td')
+    const cancelButton = document.createElement('button')
+    cancelButton.textContent = 'Cancel'
+    cancelButton.classList.add('btn', 'btn-red')
+    cancelButtonCell.appendChild(cancelButton)
+    row.appendChild(cancelButtonCell)
+
+    tableBody.appendChild(row)
+  })
 }
 
-createTable();
+createTable()

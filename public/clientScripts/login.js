@@ -1,6 +1,6 @@
 'use strict'
 
-async function checkLogin() {
+async function checkLogin () {
   // extract the user's email and password from the form
   const userEmail = document.getElementById('email').value
   const userPassword = document.getElementById('pwd').value
@@ -8,8 +8,8 @@ async function checkLogin() {
 
   // check that the user has entered both an email and password
   if (userEmail.trim() === '' || userPassword.trim() === '') {
-    alert('Please fill in all the required fields.');
-    return;
+    alert('Please fill in all the required fields.')
+    return
   }
 
   fetch('/checkLogin', {
@@ -47,6 +47,6 @@ async function checkLogin() {
     })
 }
 
-function loadSignUp() {
+function loadSignUp () {
   window.location.href = '/signup'
 }

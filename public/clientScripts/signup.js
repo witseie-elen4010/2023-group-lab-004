@@ -17,14 +17,14 @@ function signUp () {
     password.trim() === '' ||
     confirmPassword.trim() === ''
   ) {
-    alert('Please fill in all the required fields.');
-    return;
+    alert('Please fill in all the required fields.')
+    return
   }
 
   // Check that the user has entered matching passwords
   if (password !== confirmPassword) {
-    alert('Passwords do not match.');
-    return;
+    alert('Passwords do not match.')
+    return
   }
 
   for (let i = 0; i < radioButtons.length; i++) {
