@@ -66,8 +66,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Add your consultation management form or content here -->
-                <p>Consultation management form goes here...</p>
+                <div class="mb-3">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="eventTable">
+                            <thead>
+                                <tr>
+                                    <th>Students</th>
+                                    <th>Time</th>
+                                    <th>Spaces Available</th>
+                                    <th>Cancel</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Table rows will be dynamically generated here -->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
