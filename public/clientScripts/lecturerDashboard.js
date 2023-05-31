@@ -70,3 +70,46 @@ function loadConsultView () {
 }
 
 displayGreeting()
+
+// Sample data array
+const data = [
+  { column1: 'Value 1', column2: 'Value 2', column3: 'Value 3' },
+  { column1: 'Value 4', column2: 'Value 5', column3: 'Value 6' }
+];
+
+// Function to create and populate the table
+function createTable() {
+  const tableBody = document.getElementById("eventTable");
+
+  // Clear existing table rows
+  tableBody.innerHTML = '';
+
+  // Create new table rows
+  data.forEach((rowObj, index) => {
+      const row = document.createElement('tr');
+      Object.values(rowObj).forEach(value => {
+          const cell = document.createElement('td');
+          cell.textContent = value;
+          row.appendChild(cell);
+      });
+  
+  // Create the "cancel" button for the 4th column
+      const cancelButtonCell = document.createElement('td');
+      const cancelButton = document.createElement('button');
+      cancelButton.textContent = 'Cancel';
+      cancelButton.classList.add('btn', 'btn-primary');
+      cancelButtonCell.appendChild(cancelButton);
+      row.appendChild(cancelButtonCell);
+
+      // Add click event listener to highlight selected row
+      row.addEventListener('click', () => {
+          const selectedRows = document.querySelectorAll('.selected-row');
+          selectedRows.forEach(row => row.classList.remove('selected-row'));
+          row.classList.add('selected-row');
+      });
+
+      tableBody.appendChild(row);
+  });
+}
+
+createTable();
