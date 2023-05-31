@@ -81,8 +81,5 @@ function createTable () {
   })
 }
 
-// Call the function to create the table with the sample data
-// createTable(dataArray);
-
 // Call the function to populate the lecturer dropdown
 populateLecturerDropdown()
