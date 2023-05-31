@@ -57,5 +57,6 @@ mainRouter.route('/getAllConsultations').get(dbPosts.getAllConsultations)
 
 // booking routes
 mainRouter.route('/addBooking').post(dbPosts.addBooking)
+mainRouter.route('/getStudentConsultations').post(dbPosts.getStudentConsultations)
 
 module.exports = mainRouter

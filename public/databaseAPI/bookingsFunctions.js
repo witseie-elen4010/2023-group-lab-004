@@ -25,3 +25,18 @@ exports.addBooking = function (studentEmail, meetingID) {
     })
   })
 }
+
+// get all consultations for a student
+exports.getStudentBookings = function (studentEmail) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT c.meeting_title, c.date, c.time, c.active, u.name FROM consultations c JOIN bookings b ON c.id = b.meeting_id JOIN users u ON c.email = u.email WHERE b.student_email = ?'
+    conn.execute(sql, [studentEmail], (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('Bookings retrieved from database')
+        resolve(results)
+      }
+    })
+  })
+}
