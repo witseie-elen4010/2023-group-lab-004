@@ -63,3 +63,5 @@ fetchLogsAndCreateTable()
 function goBack () {
   window.history.back()
 }
+
+
