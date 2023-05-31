@@ -1,3 +1,5 @@
+'use strict'
+
 // Get current date
 let currentDate = new Date()
 
