@@ -8,6 +8,25 @@ function signUp () {
   const confirmPassword = document.getElementById('confirmPassword').value
   const radioButtons = document.getElementsByName('role')
   let role = ''
+
+  // Check that the user has entered all the required fields
+  if (
+    firstName.trim() === '' ||
+    lastName.trim() === '' ||
+    email.trim() === '' ||
+    password.trim() === '' ||
+    confirmPassword.trim() === ''
+  ) {
+    alert('Please fill in all the required fields.');
+    return;
+  }
+
+  // Check that the user has entered matching passwords
+  if (password !== confirmPassword) {
+    alert('Passwords do not match.');
+    return;
+  }
+
   for (let i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked) {
       role = radioButtons[i].value
