@@ -86,7 +86,6 @@ async function fetchUserDetails () {
   return user[0]
 }
 
-// load Events
 // Load event details based on the currently signed-in user
 async function generateUserData () {
   const user = await fetchUserDetails()
@@ -127,18 +126,24 @@ async function generateUserData () {
     })
     const bookings = await response.json()
     console.log(`${bookings.length} bookings fetched from database`)
-    return bookings
+    const events = []
+    for (let i = 0; i < bookings.length; i++) {
+      // convert date to correct format
+      const date = bookings[i].date
+      const year = date.substring(0, 4)
+      const month = date.substring(5, 7)
+      const day = date.substring(8, 10)
+      // create title
+      const title = `${bookings[i].meeting_title} with ${bookings[i].name} @ ${bookings[i].time.substring(0, 5)}`
+      const event = {
+        date: `${year}-${month}-${day}`,
+        title
+      }
+      events.push(event)
+    }
+    return events
   }
 }
-
-// // Event data (example)
-// const events = [
-//   { date: '2023-05-02', title: 'Meeting 1' },
-//   { date: '2023-05-05', title: 'Event 1' },
-//   { date: '2023-05-05', title: 'Event 2' },
-//   { date: '2023-05-12', title: 'Meeting 2' },
-//   { date: '2023-05-20', title: 'Event 3' }
-// ]
 
 // Generate the initial calendar
 generateCalendar(currentMonth, currentYear)
@@ -151,7 +156,7 @@ prevMonthBtn.addEventListener('click', function () {
     currentMonth = 11
     currentYear--
   }
-  // generateCalendar(currentMonth, currentYear, events)
+  generateCalendar(currentMonth, currentYear)
 })
 
 // Event listener for next month button
@@ -162,7 +167,7 @@ nextMonthBtn.addEventListener('click', function () {
     currentMonth = 0
     currentYear++
   }
-  // generateCalendar(currentMonth, currentYear, events)
+  generateCalendar(currentMonth, currentYear)
 })
 
 // Event listener for today button
@@ -175,7 +180,7 @@ todayBtn.addEventListener('click', function () {
   currentDate.getFullYear()
 
   // Update the calendar to the current month and year
-  // generateCalendar(currentMonth, currentYear, events)
+  generateCalendar(currentMonth, currentYear)
 })
 
 function loadLogPage () {
