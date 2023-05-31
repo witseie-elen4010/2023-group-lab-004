@@ -8,6 +8,52 @@ let currentYear = currentDate.getFullYear()
 // Month names array
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+// fetch signed in lecturer's details
+async function fetchUserDetails() {
+  const url = window.location.href
+  const id = url.substring(url.lastIndexOf('/') + 1)
+  const response = await fetch(`/posts/${id}`)
+  const user = await response.json()
+  console.log(`${user[0].Name} fetched from database`)
+  return user[0]
+}
+
+const user = await fetchUserDetails()
+
+//load Events
+// Load event details based on the currently signed-in user
+async function (userEmail, userRole) {
+  try {
+    let event = {};
+
+    // Check if the user is a student
+    const studentBookings = await getStudentBookings(userEmail);
+    if (studentBookings.length > 0) {
+      // Assuming the student can have multiple bookings, we'll use the first booking for this example
+      const booking = studentBookings[0];
+      event.type = 'Student';
+      event.title = booking.meeting_title;
+      event.date = booking.date;
+    } else {
+      // The user is a lecturer
+      const consultations = await getAllConsultations(userEmail);
+      if (consultations.length > 0) {
+        // Assuming the lecturer can have multiple consultations, we'll use the first consultation for this example
+        const consultation = consultations[0];
+        event.type = 'Lecturer';
+        event.title = consultation.meeting_title;
+        event.date = consultation.date;
+      }
+    }
+
+    return event;
+  } catch (error) {
+    throw new Error('Failed to load event details: ' + error.message);
+  }
+}
+
+
+
 // Event data (example)
 const events = [
   { date: '2023-05-02', title: 'Meeting 1' },
@@ -17,31 +63,15 @@ const events = [
   { date: '2023-05-20', title: 'Event 3' }
 ]
 
+
 // function to move to the joinConsultation page
 function joinConsultation() {
   window.location.href = '/joinConsultation'
 }
 
-async function fetchConsultationsAndCreateCalendar() {
-  try {
-    const response = await fetch('/getAllConsultations')
-    const data = await response.json()
-
-    // data.forEach(obj => {
-    //   const date = new Date(obj.date)
-    //   const localDate = date.toISOString().slice(0, 10)
-    //   obj.date = localDate
-    // })
-
-    console.log(data)
-    // createTable(data)
-  } catch (error) {
-    console.error('Error:', error)
-  }
-}
 
 // Function to generate the calendar
-function generateCalendar(month, year) {
+function generateCalendar(month, year, events) {
   // Clear the calendar body
   const calendarBody = document.getElementById('calendarBody')
   calendarBody.innerHTML = ''
@@ -104,7 +134,7 @@ function generateCalendar(month, year) {
 }
 
 // Generate the initial calendar
-generateCalendar(currentMonth, currentYear)
+generateCalendar(currentMonth, currentYear, events)
 
 // Event listener for previous month button
 const prevMonthBtn = document.getElementById('prevMonthBtn')
@@ -114,7 +144,7 @@ prevMonthBtn.addEventListener('click', function () {
     currentMonth = 11
     currentYear--
   }
-  generateCalendar(currentMonth, currentYear)
+  generateCalendar(currentMonth, currentYear, events)
 })
 
 // Event listener for next month button
@@ -125,7 +155,7 @@ nextMonthBtn.addEventListener('click', function () {
     currentMonth = 0
     currentYear++
   }
-  generateCalendar(currentMonth, currentYear)
+  generateCalendar(currentMonth, currentYear, events)
 })
 
 
@@ -139,7 +169,7 @@ todayBtn.addEventListener('click', function () {
   currentDate.getFullYear()
 
   // Update the calendar to the current month and year
-  generateCalendar(currentMonth, currentYear)
+  generateCalendar(currentMonth, currentYear, events)
 })
 
 function loadLogPage() {
