@@ -67,7 +67,7 @@ function createTable() {
         const joinButtonCell = document.createElement('td');
         const joinButton = document.createElement('button');
         joinButton.textContent = 'Join';
-        joinButton.classList.add('btn', 'btn-primary');
+        joinButton.classList.add('btn', 'btn-green');
         joinButtonCell.appendChild(joinButton);
         row.appendChild(joinButtonCell);
 
