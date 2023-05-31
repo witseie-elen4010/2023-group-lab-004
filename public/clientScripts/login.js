@@ -6,6 +6,12 @@ async function checkLogin () {
   const userPassword = document.getElementById('pwd').value
   const div = document.getElementById('div')
 
+  // check that the user has entered both an email and password
+  if (userEmail.trim() === '' || userPassword.trim() === '') {
+    alert('Please fill in all the required fields.');
+    return;
+  }
+
   fetch('/checkLogin', {
     method: 'POST',
     headers: {
