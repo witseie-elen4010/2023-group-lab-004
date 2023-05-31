@@ -29,7 +29,7 @@ mainRouter.get('/studentdashboard/:id', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'studentDashboard.html'))
 })
 
-mainRouter.get('/viewlogs', function (req, res) {
+mainRouter.get('/viewlogs/:id', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'logs.html'))
 })
 

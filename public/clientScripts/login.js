@@ -1,6 +1,6 @@
 'use strict'
 
-async function checkLogin () {
+async function checkLogin() {
   // extract the user's email and password from the form
   const userEmail = document.getElementById('email').value
   const userPassword = document.getElementById('pwd').value
@@ -24,13 +24,15 @@ async function checkLogin () {
   })
     .then(response => response.json())
     .then(data => {
-    // Handle the response data
+      // Handle the response data
       console.log(data)
       if (data.isValid === true) {
         if (data.role === 'lecturer') {
           window.location.href = `/lecturerdashboard/${data.email}`
-        } else {
+        } else if (data.role === 'student') {
           window.location.href = `/studentdashboard/${data.email}`
+        } else {
+          window.location.href = `/viewlogs/${data.email}`
         }
       } else {
         const p = document.createElement('p')
@@ -40,11 +42,11 @@ async function checkLogin () {
       }
     })
     .catch(error => {
-    // Handle any errors
+      // Handle any errors
       console.error(error)
     })
 }
 
-function loadSignUp () {
+function loadSignUp() {
   window.location.href = '/signup'
 }
