@@ -15,15 +15,27 @@
       height: 450px; /* Set the desired height */
       overflow: auto;
     }
+    .btn-purple {
+      background-color: purple;
+      color: white;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>All actions taken on Calendr.</h1>
+    <div class="row align-items-center">
+      <div class="col-auto">
+          <img src="/cdn/resources/company-logo.png" alt="Company Logo" height="70">
+      </div>
+      <div class="col">
+          <h1>All actions taken on Calendr.</h1>
+      </div>
+  </div>
+  <div>
     <div id="tableContainer"></div>
     <div>
       <p> </p>  
-      <button type="submit" class="btn btn-primary" onclick="goBack()">Return</button>
+      <button type="submit" class="btn btn-purple" onclick="goBack()">Return</button>
     </div>
   </div>
 </body>
