@@ -17,20 +17,17 @@ async function fetchStudentDetails () {
 
 fetchStudentDetails()
 
-// test lecturers
-const lecturers = [
-  'S. Levitt',
-  'AK Mohamed',
-  'T. Celik'
-]
-
 // Sample data array
 const data = [
-  { column1: 'Value 1', column2: 'Value 2', column3: 'Value 3' },
-  { column1: 'Value 4', column2: 'Value 5', column3: 'Value 6' }
+  { column1: 'Value 1', column2: 'Value 2', column3: 'Value 3', column4: 'Value 4' },
+  { column1: 'Value 4', column2: 'Value 5', column3: 'Value 6', column4: 'Value 7' }
 ]
 // Function to populate the lecturer dropdown
-function populateLecturerDropdown () {
+async function populateLecturerDropdown () {
+  const result = await fetch('/getLecturers')
+  const lecturers = await result.json()
+  console.log(lecturers)
+
   const lecturerDropdown = document.getElementById('eventLecturer')
 
   // Clear existing options
@@ -38,7 +35,7 @@ function populateLecturerDropdown () {
 
   // Create new options based on the array
   for (let i = 0; i < lecturers.length; i++) {
-    const lecturer = lecturers[i]
+    const lecturer = `${lecturers[i].Name} ${lecturers[i].Surname}`
     const option = document.createElement('option')
     option.value = lecturer
     option.textContent = lecturer

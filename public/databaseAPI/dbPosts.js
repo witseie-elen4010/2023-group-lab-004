@@ -67,3 +67,8 @@ exports.getStudentConsultations = async (req, res) => {
   const consultations = await bookingTable.getStudentBookings(req.body.studentEmail)
   res.send(consultations)
 }
+
+exports.getLecturers = async (req, res) => {
+  const lecturers = await userTable.getAllLecturers()
+  res.send(lecturers)
+}

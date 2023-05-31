@@ -37,12 +37,14 @@ mainRouter.get('/myConsultations/:id', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'myConsultations.html'))
 })
 
+// user routes
 mainRouter
   .route('/posts')
   .get(dbPosts.getAllPosts) // get all users
   .post(dbPosts.createPost) // add user
 mainRouter.route('/posts/:id').get(dbPosts.getPost).delete(dbPosts.deletePost)
 mainRouter.route('/checkLogin').post(dbPosts.checkLogin)
+mainRouter.route('/getLecturers').get(dbPosts.getLecturers)
 
 // log all actions taken
 mainRouter

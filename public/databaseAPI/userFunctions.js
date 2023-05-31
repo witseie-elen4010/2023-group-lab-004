@@ -130,3 +130,18 @@ exports.deleteUser = function (email) {
     else console.log('User deleted from database')
   })
 }
+
+// Function to get all lecturers from the database
+exports.getAllLecturers = function () {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT Name, Surname FROM users WHERE role = "lecturer"'
+    conn.execute(sql, (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('Lecturers retrieved from database')
+        resolve(results)
+      }
+    })
+  })
+}
