@@ -12,8 +12,13 @@ async function fetchLecturerDetails () {
 
 async function displayGreeting () {
   const lecturer = await fetchLecturerDetails()
-  const h = document.getElementById('heading')
-  h.innerHTML = `Lecturer Dashboard - ${lecturer.Name}`
+  // const h = document.getElementById('heading')
+  // h.innerHTML = `Lecturer Dashboard - Welcome ${lecturer.Name}`
+  const greeting = document.getElementById('heading')
+  const p = document.createElement('p')
+  const text = document.createTextNode(`Welcome ${lecturer.Name}`)
+  p.appendChild(text)
+  greeting.appendChild(p)
 }
 
 async function addConsultation () {
