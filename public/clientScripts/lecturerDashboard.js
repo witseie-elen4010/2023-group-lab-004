@@ -79,7 +79,7 @@ const data = [
 
 // Function to create and populate the table
 function createTable() {
-  const tableBody = document.getElementById("eventTable");
+  const tableBody = document.getElementById("tableBody");
 
   // Clear existing table rows
   tableBody.innerHTML = '';
@@ -100,13 +100,6 @@ function createTable() {
       cancelButton.classList.add('btn', 'btn-primary');
       cancelButtonCell.appendChild(cancelButton);
       row.appendChild(cancelButtonCell);
-
-      // Add click event listener to highlight selected row
-      row.addEventListener('click', () => {
-          const selectedRows = document.querySelectorAll('.selected-row');
-          selectedRows.forEach(row => row.classList.remove('selected-row'));
-          row.classList.add('selected-row');
-      });
 
       tableBody.appendChild(row);
   });
