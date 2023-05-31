@@ -8,7 +8,7 @@ async function fetchStudentDetails () {
   const response = await fetch(`/posts/${id}`)
   const user = await response.json()
   console.log(user[0])
-  const greeting = document.getElementById('greeting')
+  const greeting = document.getElementById('heading')
   const p = document.createElement('p')
   const text = document.createTextNode(`Welcome ${user[0].Name}`)
   p.appendChild(text)
@@ -67,7 +67,7 @@ function createTable() {
         const joinButtonCell = document.createElement('td');
         const joinButton = document.createElement('button');
         joinButton.textContent = 'Join';
-        joinButton.classList.add('btn', 'btn-primary');
+        joinButton.classList.add('btn', 'btn-green');
         joinButtonCell.appendChild(joinButton);
         row.appendChild(joinButtonCell);
 
