@@ -88,6 +88,14 @@ async function fetchUserDetails () {
   return user[0]
 }
 
+function strike(text) {
+  var result = "";
+  $.each(text.split(""), function () {
+    result = result + "\u0336" + this;
+  });
+  return result;
+}
+
 // Load event details based on the currently signed-in user
 async function generateUserData () {
   const user = await fetchUserDetails()
@@ -109,7 +117,11 @@ async function generateUserData () {
       const month = date.substring(5, 7)
       const day = date.substring(8, 10)
       // create title
-      const title = `${consultations[i].meeting_title} @ ${consultations[i].time.substring(0, 5)}, ${consultations[i].duration} mins`
+      let title = `${consultations[i].meeting_title} @ ${consultations[i].time.substring(0, 5)}, ${consultations[i].duration} mins`
+      if (consultations[i].active === 0) {
+        title = `CANCELLED: ${consultations[i].meeting_title} @ ${consultations[i].time.substring(0, 5)}`
+      }
+      
       const event = {
         date: `${year}-${month}-${day}`,
         title
