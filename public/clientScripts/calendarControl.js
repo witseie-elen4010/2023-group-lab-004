@@ -114,7 +114,11 @@ async function generateUserData () {
       const month = date.substring(5, 7)
       const day = date.substring(8, 10)
       // create title
-      const title = `${consultations[i].meeting_title} @ ${consultations[i].time.substring(0, 5)}, ${consultations[i].duration} mins`
+      let title = `${consultations[i].meeting_title} @ ${consultations[i].time.substring(0, 5)}, ${consultations[i].duration} mins`
+      if (consultations[i].active === 0) {
+        title = `CANCELLED: ${consultations[i].meeting_title} @ ${consultations[i].time.substring(0, 5)}`
+      }
+      
       const event = {
         date: `${year}-${month}-${day}`,
         title
@@ -141,7 +145,10 @@ async function generateUserData () {
       const month = date.substring(5, 7)
       const day = date.substring(8, 10)
       // create title
-      const title = `${bookings[i].meeting_title} with ${bookings[i].name} @ ${bookings[i].time.substring(0, 5)}`
+      let title = `${bookings[i].meeting_title} with ${bookings[i].name} @ ${bookings[i].time.substring(0, 5)}`
+      if (bookings[i].active === 0) {
+        title = `CANCELLED: ${bookings[i].meeting_title} with ${bookings[i].name}`
+      }
       const event = {
         date: `${year}-${month}-${day}`,
         title
