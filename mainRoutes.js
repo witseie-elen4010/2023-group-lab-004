@@ -45,6 +45,7 @@ mainRouter
 mainRouter.route('/posts/:id').get(dbPosts.getPost).delete(dbPosts.deletePost)
 mainRouter.route('/checkLogin').post(dbPosts.checkLogin)
 mainRouter.route('/getLecturers').get(dbPosts.getLecturers)
+mainRouter.route('/getEmails').get(dbPosts.getAllEmails)
 
 // log all actions taken
 mainRouter
