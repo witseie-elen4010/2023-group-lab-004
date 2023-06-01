@@ -126,5 +126,143 @@ describe('Consultation Functions', () => {
       );
       expect(logTable.logAction).not.toHaveBeenCalled();
     });
+
+    
   });
+
+  describe('cancelConsultation', () => {
+    test('should cancel a consultation and log the action', async () => {
+      // Mock the execute function of the database connection
+      conn.execute = jest.fn((sql, params, callback) => {
+        callback(null, null, null);
+      });
+
+      // Mock the logAction function
+      logTable.logAction = jest.fn();
+
+      // Call the cancelConsultation function
+      const consultationId = 1;
+      await consultationTable.cancelConsultation(consultationId);
+
+      // Assertions
+      expect(conn.execute).toHaveBeenCalledTimes(1);
+      expect(conn.execute).toHaveBeenCalledWith(
+        'UPDATE consultations SET active = 0 WHERE id = ?',
+        [1],
+        expect.any(Function)
+      );
+      expect(logTable.logAction).toHaveBeenCalledTimes(0);
+    });
+
+    test('should reject with an error if there is a database error', async () => {
+      // Mock the execute function of the database connection to simulate an error
+      conn.execute = jest.fn((sql, params, callback) => {
+        callback(new Error('Database error'), null, null);
+      });
+
+      // Mock the logAction function
+      logTable.logAction = jest.fn();
+
+      // Call the cancelConsultation function
+      const consultationId = 1;
+
+      // Assertions
+      await expect(consultationTable.cancelConsultation(consultationId)).rejects.toThrow('Database error');
+      expect(conn.execute).toHaveBeenCalledTimes(1);
+      expect(conn.execute).toHaveBeenCalledWith(
+        'UPDATE consultations SET active = 0 WHERE id = ?',
+        [1],
+        expect.any(Function)
+      );
+      expect(logTable.logAction).not.toHaveBeenCalled();
+      expect(console.log).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('getAllPlannedConsultations', () => {
+    test('should retrieve all planned consultations from the database', async () => {
+      // Mock the execute function of the database connection
+      conn.execute = jest.fn((sql, callback) => {
+        callback(null, [{ id: 1, meeting_title: 'Consultation 1' }], null);
+      });
+
+      // Call the getAllPlannedConsultations function
+      const result = await consultationTable.getAllPlannedConsultations();
+
+      // Assertions
+      expect(conn.execute).toHaveBeenCalledTimes(1);
+      expect(conn.execute).toHaveBeenCalledWith(
+        'SELECT * FROM consultations',
+        expect.any(Function)
+      );
+      expect(result).toEqual([{ id: 1, meeting_title: 'Consultation 1' }]);
+      expect(console.log).toHaveBeenCalledWith('Consultations retrieved from database');
+    });
+
+    test('should reject with an error if there is a database error', async () => {
+      // Mock the execute function of the database connection to simulate an error
+      conn.execute = jest.fn((sql, callback) => {
+        callback(new Error('Database error'), null, null);
+      });
+
+      // Call the getAllPlannedConsultations function
+      await expect(consultationTable.getAllPlannedConsultations()).rejects.toThrow('Database error');
+
+      // Assertions
+      expect(conn.execute).toHaveBeenCalledTimes(1);
+      expect(conn.execute).toHaveBeenCalledWith(
+        'SELECT * FROM consultations',
+        expect.any(Function)
+      );
+      expect(console.log).not.toHaveBeenCalled();
+    });
+  });
+  
+  describe('getStudentConsultations', () => {
+    test('should retrieve consultations that a student can join given a chosen lecturer', async () => {
+      const studentEmail = 'student@example.com';
+      const lecturerEmail = 'lecturer@example.com';
+
+      // Mock the execute function of the database connection
+      conn.execute = jest.fn((sql, params, callback) => {
+        callback(null, [{ id: 1, meeting_title: 'Consultation 1' }], null);
+      });
+
+      // Call the getStudentConsultations function
+      const result = await consultationTable.getStudentConsultations(studentEmail, lecturerEmail);
+
+      // Assertions
+      expect(conn.execute).toHaveBeenCalledTimes(1);
+      expect(conn.execute).toHaveBeenCalledWith(
+        'SELECT c.* FROM consultations c LEFT JOIN bookings b ON c.id = b.meeting_id AND b.student_email = ? WHERE c.email = ? AND b.id IS NULL',
+        [studentEmail, lecturerEmail],
+        expect.any(Function)
+      );
+      expect(result).toEqual([{ id: 1, meeting_title: 'Consultation 1' }]);
+      expect(console.log).toHaveBeenCalledWith('Consultations retrieved from database');
+    });
+
+    test('should reject with an error if there is a database error', async () => {
+      const studentEmail = 'student@example.com';
+      const lecturerEmail = 'lecturer@example.com';
+
+      // Mock the execute function of the database connection to simulate an error
+      conn.execute = jest.fn((sql, params, callback) => {
+        callback(new Error('Database error'), null, null);
+      });
+
+      // Call the getStudentConsultations function
+      await expect(consultationTable.getStudentConsultations(studentEmail, lecturerEmail)).rejects.toThrow('Database error');
+
+      // Assertions
+      expect(conn.execute).toHaveBeenCalledTimes(1);
+      expect(conn.execute).toHaveBeenCalledWith(
+        'SELECT c.* FROM consultations c LEFT JOIN bookings b ON c.id = b.meeting_id AND b.student_email = ? WHERE c.email = ? AND b.id IS NULL',
+        [studentEmail, lecturerEmail],
+        expect.any(Function)
+      );
+      expect(console.log).not.toHaveBeenCalled();
+    });
+  });
+
 });
