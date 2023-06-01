@@ -1,3 +1,6 @@
+# Architecture Decision Record (ADR)
+
+## Title: Any Developer Stories added after the sprint intialisation are stated below
 ### Sprint 1
 
 ### Sprint 2
