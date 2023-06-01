@@ -57,6 +57,8 @@ mainRouter.route('/addConsultation').post(dbPosts.addConsultation)
 mainRouter.route('/getConsultations').post(dbPosts.getConsultations) // get all consultations for a lecturer
 mainRouter.route('/getAllConsultations').get(dbPosts.getAllConsultations)
 mainRouter.route('/getAvailableStudentConsultations').post(dbPosts.getAvailableStudentConsultations)
+mainRouter.route('/getDetailedConsultation').post(dbPosts.getDetailedConsultation)
+mainRouter.route('/cancelConsultation').post(dbPosts.cancelConsultation)
 
 // booking routes
 mainRouter.route('/addBooking').post(dbPosts.addBooking)

@@ -88,3 +88,18 @@ exports.getStudentConsultations = function (studentEmail, lecturerEmail) {
     })
   })
 }
+
+// Function to get details of all consultations given a lecturer email
+exports.getDetailedConsultation = function (lecturerEmail) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT c.id, c.meeting_title, c.date, c.time, c.duration, c.active, c.number_of_students, GROUP_CONCAT(u.name) AS students FROM consultations c LEFT JOIN bookings b ON c.id = b.meeting_id LEFT JOIN users u ON b.student_email = u.email WHERE c.email = ? AND c.active = 1 GROUP BY c.id, c.meeting_title, c.email'
+    conn.execute(sql, [lecturerEmail], (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('Consultations retrieved from database')
+        resolve(results)
+      }
+    })
+  })
+}
