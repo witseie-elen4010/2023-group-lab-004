@@ -217,7 +217,7 @@ describe('Consultation Functions', () => {
       expect(console.log).not.toHaveBeenCalled();
     });
   });
-  
+
   describe('getStudentConsultations', () => {
     test('should retrieve consultations that a student can join given a chosen lecturer', async () => {
       const studentEmail = 'student@example.com';
@@ -262,6 +262,61 @@ describe('Consultation Functions', () => {
         expect.any(Function)
       );
       expect(console.log).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Consultation Functions', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+  
+    afterAll(() => {
+      jest.restoreAllMocks();
+    });
+  
+    describe('getDetailedConsultation', () => {
+      test('should retrieve details of all consultations given a lecturer email', async () => {
+        const lecturerEmail = 'lecturer@example.com';
+  
+        // Mock the execute function of the database connection
+        conn.execute = jest.fn((sql, params, callback) => {
+          callback(null, [{ id: 1, meeting_title: 'Consultation 1', date: '2023-05-25', time: '09:00:00', duration: 30, active: 1, number_of_students: 3, students: 'Student 1, Student 2, Student 3' }], null);
+        });
+  
+        // Call the getDetailedConsultation function
+        const result = await consultationTable.getDetailedConsultation(lecturerEmail);
+  
+        // Assertions
+        expect(conn.execute).toHaveBeenCalledTimes(1);
+        expect(conn.execute).toHaveBeenCalledWith(
+          'SELECT c.id, c.meeting_title, c.date, c.time, c.duration, c.active, c.number_of_students, GROUP_CONCAT(u.name) AS students FROM consultations c LEFT JOIN bookings b ON c.id = b.meeting_id LEFT JOIN users u ON b.student_email = u.email WHERE c.email = ? AND c.active = 1 GROUP BY c.id, c.meeting_title, c.email',
+          [lecturerEmail],
+          expect.any(Function)
+        );
+        expect(result).toEqual([{ id: 1, meeting_title: 'Consultation 1', date: '2023-05-25', time: '09:00:00', duration: 30, active: 1, number_of_students: 3, students: 'Student 1, Student 2, Student 3' }]);
+        expect(console.log).toHaveBeenCalledWith('Consultations retrieved from database');
+      });
+  
+      test('should reject with an error if there is a database error', async () => {
+        const lecturerEmail = 'lecturer@example.com';
+  
+        // Mock the execute function of the database connection to simulate an error
+        conn.execute = jest.fn((sql, params, callback) => {
+          callback(new Error('Database error'), null, null);
+        });
+  
+        // Call the getDetailedConsultation function
+        await expect(consultationTable.getDetailedConsultation(lecturerEmail)).rejects.toThrow('Database error');
+  
+        // Assertions
+        expect(conn.execute).toHaveBeenCalledTimes(1);
+        expect(conn.execute).toHaveBeenCalledWith(
+          'SELECT c.id, c.meeting_title, c.date, c.time, c.duration, c.active, c.number_of_students, GROUP_CONCAT(u.name) AS students FROM consultations c LEFT JOIN bookings b ON c.id = b.meeting_id LEFT JOIN users u ON b.student_email = u.email WHERE c.email = ? AND c.active = 1 GROUP BY c.id, c.meeting_title, c.email',
+          [lecturerEmail],
+          expect.any(Function)
+        );
+        expect(console.log).not.toHaveBeenCalled();
+      });
     });
   });
 
