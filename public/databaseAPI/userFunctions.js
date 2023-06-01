@@ -105,13 +105,15 @@ exports.validateUser = function (email, password) {
               surname: user[0].surname
             }
             // log sign in action
-            const action = {
-              date: new Date().toISOString().slice(0, 10),
-              time: new Date().toISOString().slice(11, 19),
-              nature: 'User Signed In',
-              email: user[0].email
+            if (result.isValid) {
+              const action = {
+                date: new Date().toISOString().slice(0, 10),
+                time: new Date().toISOString().slice(11, 19),
+                nature: 'User Signed In',
+                email: user[0].email
+              }
+              logTable.logAction(action)
             }
-            logTable.logAction(action)
             // return the result
             console.log('User retrieved from database')
             resolve(result)
