@@ -6,10 +6,8 @@ let lecturers = []
 async function fetchStudentDetails () {
   const url = window.location.href
   const id = url.substring(url.lastIndexOf('/') + 1)
-  console.log(id)
   const response = await fetch(`/posts/${id}`)
   const user = await response.json()
-  console.log(user[0])
   const greeting = document.getElementById('heading')
   const p = document.createElement('p')
   const text = document.createTextNode(`Welcome ${user[0].Name}`)
@@ -19,16 +17,11 @@ async function fetchStudentDetails () {
 
 fetchStudentDetails()
 
-// Sample data array
-const data = [
-  { column1: 'Value 1', column2: 'Value 2', column3: 'Value 3', column4: 'Value 4' },
-  { column1: 'Value 4', column2: 'Value 5', column3: 'Value 6', column4: 'Value 7' }
-]
 // Function to populate the lecturer dropdown
 async function populateLecturerDropdown () {
+  // Get all lecturers from the database
   const result = await fetch('/getLecturers')
   lecturers = await result.json()
-  console.log(lecturers)
 
   const lecturerDropdown = document.getElementById('eventLecturer')
 
@@ -71,7 +64,6 @@ async function createTable () {
     body: JSON.stringify({ studentEmail, lecturerEmail: lectEmail })
   })
   const consultations = await result.json()
-  console.log(consultations)
 
   // Clear existing table rows
   tableBody.innerHTML = ''
@@ -131,8 +123,7 @@ async function createTable () {
         },
         body: JSON.stringify({ studentEmail, meetingID: meeting.id })
       })
-      console.log(studentEmail)
-      console.log(`Meeting ID: ${meeting.id}`)
+      console.log(`${studentEmail} joining Meeting ID: ${meeting.id}`)
     })
 
     tableBody.appendChild(row)

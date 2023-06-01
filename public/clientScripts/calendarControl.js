@@ -178,8 +178,8 @@ todayBtn.addEventListener('click', function () {
   currentDate = new Date()
 
   // Get the month and year of the current date
-  currentMonth = currentDate.getMonth()
-  currentDate.getFullYear()
+  const currentMonth = currentDate.getMonth()
+  currentYear = currentDate.getFullYear()
 
   // Update the calendar to the current month and year
   generateCalendar(currentMonth, currentYear)
