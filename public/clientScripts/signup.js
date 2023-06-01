@@ -1,6 +1,6 @@
 'use strict'
 
-function signUp () {
+async function signUp () {
   const firstName = document.getElementById('firstName').value
   const lastName = document.getElementById('lastName').value
   const email = document.getElementById('email').value
@@ -27,6 +27,18 @@ function signUp () {
     return
   }
 
+  // check that the entered email is unique
+  let isEmailUnique = true
+  const result = await fetch('/getEmails')
+  const existingEmails = await result.json()
+  console.log(existingEmails)
+  for (let i = 0; i < existingEmails.length; i++) {
+    if (email === existingEmails[i].email) {
+      isEmailUnique = false
+      break
+    }
+  }
+
   for (let i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked) {
       role = radioButtons[i].value
@@ -35,11 +47,12 @@ function signUp () {
   }
   const div = document.getElementById('div')
   const p = document.createElement('p')
+  console.log(isEmailUnique)
   if (password !== confirmPassword) {
     const errorMessage = document.createTextNode('Passwords do not match')
     p.appendChild(errorMessage)
     div.appendChild(p)
-  } else {
+  } else if (isEmailUnique) {
     fetch('/posts', {
       method: 'POST',
       headers: {
@@ -71,7 +84,25 @@ function signUp () {
     div.appendChild(p)
     // create button to redirect to login page
     const button = document.createElement('button')
-    button.classList.add('btn', 'btn-primary')
+    button.classList.add('btn', 'btn-purple')
+    const text = document.createTextNode('Return to login')
+    button.appendChild(text)
+    div.appendChild(button)
+    button.addEventListener('click', () => {
+      window.location.href = '/login'
+    })
+  } else {
+    alert('Email already exists for a user, try logging in')
+    // hide sign up button
+    const signUpButton = document.getElementById('signUpButton')
+    signUpButton.style.display = 'none'
+    // create success message
+    const successMessage = document.createTextNode(`${email} already exists`)
+    p.appendChild(successMessage)
+    div.appendChild(p)
+    // create button to redirect to login page
+    const button = document.createElement('button')
+    button.classList.add('btn', 'btn-purple')
     const text = document.createTextNode('Return to login')
     button.appendChild(text)
     div.appendChild(button)

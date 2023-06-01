@@ -147,3 +147,18 @@ exports.getAllLecturers = function () {
     })
   })
 }
+
+// Function to get all emails from the database
+exports.getAllEmails = function () {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT email FROM users'
+    conn.execute(sql, (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('Emails retrieved from database')
+        resolve(results)
+      }
+    })
+  })
+}
