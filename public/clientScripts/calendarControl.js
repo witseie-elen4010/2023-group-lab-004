@@ -11,7 +11,7 @@ let currentYear = currentDate.getFullYear()
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 // Function to generate the calendar
-async function generateCalendar (month, year) {
+async function generateCalendar(month, year) {
   // get the event data
   const events = await generateUserData()
   console.log(events)
@@ -84,7 +84,7 @@ async function generateCalendar (month, year) {
 }
 
 // fetch signed in lecturer's details
-async function fetchUserDetails () {
+async function fetchUserDetails() {
   const url = window.location.href
   const id = url.substring(url.lastIndexOf('/') + 1)
   const response = await fetch(`/posts/${id}`)
@@ -94,7 +94,7 @@ async function fetchUserDetails () {
 }
 
 // Load event details based on the currently signed-in user
-async function generateUserData () {
+async function generateUserData() {
   const user = await fetchUserDetails()
   if (user.role === 'lecturer') {
     const response = await fetch('/getConsultations', {
@@ -139,17 +139,16 @@ async function generateUserData () {
     const events = []
     for (let i = 0; i < bookings.length; i++) {
       // convert date to correct format
-      const date = bookings[i].date
-      const year = date.substring(0, 4)
-      const month = date.substring(5, 7)
-      const day = date.substring(8, 10)
+      const date = new Date(bookings[i].date)
+      const options = { timeZone: 'Africa/Johannesburg', year: 'numeric', month: '2-digit', day: '2-digit' }
+      const extractedDate = date.toLocaleDateString('en-ZA', options)
       // create title
       let title = `${bookings[i].meeting_title} with ${bookings[i].name} @ ${bookings[i].time.substring(0, 5)}`
       if (bookings[i].active === 0) {
         title = `CANCELLED: ${bookings[i].meeting_title} with ${bookings[i].name}`
       }
       const event = {
-        date: `${year}-${month}-${day}`,
+        date: extractedDate,
         title
       }
       events.push(event)
@@ -196,11 +195,11 @@ todayBtn.addEventListener('click', function () {
   generateCalendar(currentMonth, currentYear)
 })
 
-function loadLogPage () {
+function loadLogPage() {
   window.location.href = '/viewlogs'
 }
 
 // function to move to the joinConsultation page
-function joinConsultation () {
+function joinConsultation() {
   window.location.href = '/joinConsultation'
 }
