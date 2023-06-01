@@ -88,14 +88,6 @@ async function fetchUserDetails () {
   return user[0]
 }
 
-function strike(text) {
-  var result = "";
-  $.each(text.split(""), function () {
-    result = result + "\u0336" + this;
-  });
-  return result;
-}
-
 // Load event details based on the currently signed-in user
 async function generateUserData () {
   const user = await fetchUserDetails()
