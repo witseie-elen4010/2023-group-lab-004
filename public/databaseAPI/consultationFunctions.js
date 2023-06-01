@@ -76,8 +76,8 @@ exports.getAllPlannedConsultations = function () {
 // function to get consultations that a student can join given a chosen lecturer
 exports.getStudentConsultations = function (studentEmail, lecturerEmail) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT c.* FROM consultations c LEFT JOIN bookings b ON c.id = b.meeting_id AND b.student_email = ? WHERE c.email = ? AND b.id IS NULL'
-    const params = [studentEmail, lecturerEmail]
+    const sql = 'SELECT c.* FROM consultations c LEFT JOIN (SELECT meeting_id, COUNT(*) AS bookings_count FROM bookings GROUP BY meeting_id) b ON c.id = b.meeting_id WHERE c.email = ? AND c.active = 1 AND (b.bookings_count IS NULL OR b.bookings_count < c.number_of_students) AND c.id NOT IN (SELECT meeting_id FROM bookings WHERE student_email = ?)'
+    const params = [lecturerEmail, studentEmail]
     conn.execute(sql, params, (err, results, fields) => {
       if (err) {
         reject(err)
