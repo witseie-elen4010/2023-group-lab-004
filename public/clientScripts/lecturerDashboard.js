@@ -108,7 +108,8 @@ async function createTable () {
       const cell = document.createElement('td')
       if (property === 'date') {
         const date = new Date(rowObj[property])
-        const formattedDate = date.toISOString().split('T')[0]
+        const options = { timeZone: 'Africa/Johannesburg', year: 'numeric', month: '2-digit', day: '2-digit' }
+        const formattedDate = date.toLocaleDateString('en-ZA', options)
         cell.textContent = formattedDate
       } else {
         cell.textContent = rowObj[property]
@@ -157,16 +158,14 @@ async function createTable () {
   })
 }
 
-document.getElementById('refreshButton1').addEventListener('click', function() {
+document.getElementById('refreshButton1').addEventListener('click', function () {
   // Reload the page
-  location.reload();
-
+  location.reload()
 })
 
-document.getElementById('refreshButton2').addEventListener('click', function() {
+document.getElementById('refreshButton2').addEventListener('click', function () {
   // Reload the page
-  location.reload();
-
+  location.reload()
 })
 
 createTable()
