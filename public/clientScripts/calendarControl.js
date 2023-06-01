@@ -119,7 +119,7 @@ async function generateUserData () {
     return events
   }
   if (user.role === 'student') {
-    const response = await fetch('/getStudentConsultations', {
+    const response = await fetch('/getStudentBookings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

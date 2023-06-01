@@ -2,6 +2,7 @@
 
 const conn = require('../../db.js')
 const logTable = require('./logFunctions.js')
+const bookingTable = require('./bookingsFunctions.js')
 
 // Get all consultations for a lecturer
 exports.getAllConsultations = function (email) {
@@ -62,6 +63,22 @@ exports.getAllPlannedConsultations = function () {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM consultations'
     conn.execute(sql, (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('Consultations retrieved from database')
+        resolve(results)
+      }
+    })
+  })
+}
+
+// function to get consultations that a student can join given a chosen lecturer
+exports.getStudentConsultations = function (studentEmail, lecturerEmail) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT c.* FROM consultations c LEFT JOIN bookings b ON c.id = b.meeting_id AND b.student_email = ? WHERE c.email = ? AND b.id IS NULL'
+    const params = [studentEmail, lecturerEmail]
+    conn.execute(sql, params, (err, results, fields) => {
       if (err) {
         reject(err)
       } else {

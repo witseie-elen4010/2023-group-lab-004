@@ -58,13 +58,17 @@ async function createTable () {
   console.log(lectEmail)
   const tableBody = document.getElementById('tableBody')
 
+  // get the student's email from the URL
+  const url = window.location.href
+  const studentEmail = url.substring(url.lastIndexOf('/') + 1)
+
   // Get the consultations that match the selected lecturer
-  const result = await fetch('/getConsultations', {
+  const result = await fetch('/getAvailableStudentConsultations', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ email: lectEmail })
+    body: JSON.stringify({ studentEmail, lecturerEmail: lectEmail })
   })
   const consultations = await result.json()
   console.log(consultations)
@@ -114,12 +118,21 @@ async function createTable () {
 
       // Extract information from the parent row
       const title = parentRow.cells[0].textContent
-      const date = parentRow.cells[1].textContent
-      const time = parentRow.cells[2].textContent
-      const duration = parentRow.cells[3].textContent
+      const duration = parseInt(parentRow.cells[3].textContent)
 
-      // Perform actions based on the extracted information
-      console.log(`Joining ${title} on ${date} at ${time} for ${duration}`)
+      // Get the meeting ID from the consultations array using title, time and duration
+      const meeting = consultations.find(consultation => consultation.meeting_title === title && consultation.duration === duration)
+
+      // Add the booking to the database
+      fetch('/addBooking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ studentEmail, meetingID: meeting.id })
+      })
+      console.log(studentEmail)
+      console.log(`Meeting ID: ${meeting.id}`)
     })
 
     tableBody.appendChild(row)
