@@ -51,9 +51,9 @@ async function generateCalendar (month, year) {
         const calendarCell = document.createElement('td')
         calendarCell.textContent = date
 
-        //Highlight today's cell
+        // Highlight today's cell
         const isToday = date === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()
-        if (isToday){
+        if (isToday) {
           calendarCell.classList.add('today')
         }
         // Check if there are events for the current date
@@ -109,10 +109,9 @@ async function generateUserData () {
     const events = []
     for (let i = 0; i < consultations.length; i++) {
       // convert date to correct format
-      const date = consultations[i].date
-      const year = date.substring(0, 4)
-      const month = date.substring(5, 7)
-      const day = date.substring(8, 10)
+      const date = new Date(consultations[i].date)
+      const options = { timeZone: 'Africa/Johannesburg', year: 'numeric', month: '2-digit', day: '2-digit' }
+      const extractedDate = date.toLocaleDateString('en-ZA', options)
       // create title
       let title = `${consultations[i].meeting_title} @ ${consultations[i].time.substring(0, 5)}, ${consultations[i].duration} mins`
       if (consultations[i].active === 0) {
@@ -120,7 +119,7 @@ async function generateUserData () {
       }
 
       const event = {
-        date: `${year}-${month}-${day}`,
+        date: extractedDate,
         title
       }
       events.push(event)
