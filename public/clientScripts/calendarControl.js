@@ -51,6 +51,11 @@ async function generateCalendar (month, year) {
         const calendarCell = document.createElement('td')
         calendarCell.textContent = date
 
+        //Highlight today's cell
+        const isToday = date === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()
+        if (isToday){
+          calendarCell.classList.add('today')
+        }
         // Check if there are events for the current date
         const eventsForDate = events.filter(function (event) {
           return new Date(event.date).getDate() === date && new Date(event.date).getMonth() === month && new Date(event.date).getFullYear() === year
