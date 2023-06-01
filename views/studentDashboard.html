@@ -9,7 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script defer src="/cdn/pathLoader.js"></script>
     <script defer src="/cdn/clientScripts/studentDashboard.js"></script>
     <script defer src="/cdn/clientScripts/calendarControl.js"></script>
     <style>
@@ -61,9 +60,10 @@
                                 <table class="table table-striped" id="eventTable">
                                     <thead>
                                         <tr>
-                                            <th>Lecturer</th>
+                                            <th>Title</th>
+                                            <th>Date</th>
                                             <th>Time</th>
-                                            <th>Spaces Available</th>
+                                            <th>Duration</th>
                                             <th>Join</th>
                                         </tr>
                                     </thead>
@@ -92,13 +92,15 @@
     </div>
 
         <div class="container">
-            <div class="text-center mb-1">
-                <button id="todayBtn" class="btn btn-purple mr-2">Today</button>
-            </div>
-            <div class="text-center mb-3">
-                <button id="prevMonthBtn" class="btn btn-purple mr-2">&lt; Prev Month</button>
-                <span id="currentMonth"></span>
-                <button id="nextMonthBtn" class="btn btn-purple ml-2">Next Month &gt;</button>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <button id="prevMonthBtn" class="btn btn-purple mr-2">&lt; Prev Month</button>
+                    <span id="currentMonth"></span>
+                    <button id="nextMonthBtn" class="btn btn-purple ml-2">Next Month &gt;</button>
+                </div>
+                <div class="text-end">
+                    <button id="todayBtn" class="btn btn-purple">Today</button>
+                </div>
             </div>
             <div class="card">
                 <table class="table table-bordered">

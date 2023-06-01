@@ -105,13 +105,15 @@ exports.validateUser = function (email, password) {
               surname: user[0].surname
             }
             // log sign in action
-            const action = {
-              date: new Date().toISOString().slice(0, 10),
-              time: new Date().toISOString().slice(11, 19),
-              nature: 'User Signed In',
-              email: user[0].email
+            if (result.isValid) {
+              const action = {
+                date: new Date().toISOString().slice(0, 10),
+                time: new Date().toISOString().slice(11, 19),
+                nature: 'User Signed In',
+                email: user[0].email
+              }
+              logTable.logAction(action)
             }
-            logTable.logAction(action)
             // return the result
             console.log('User retrieved from database')
             resolve(result)
@@ -128,5 +130,20 @@ exports.deleteUser = function (email) {
   conn.execute(sql, [email], (err, results, fields) => {
     if (err) throw err
     else console.log('User deleted from database')
+  })
+}
+
+// Function to get all lecturers from the database
+exports.getAllLecturers = function () {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT Name, Surname, email FROM users WHERE role = "lecturer"'
+    conn.execute(sql, (err, results, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        console.log('Lecturers retrieved from database')
+        resolve(results)
+      }
+    })
   })
 }

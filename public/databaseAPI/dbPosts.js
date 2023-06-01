@@ -63,7 +63,17 @@ exports.addBooking = async (req, res) => {
   res.send(booking)
 }
 
-exports.getStudentConsultations = async (req, res) => {
+exports.getStudentBookings = async (req, res) => {
   const consultations = await bookingTable.getStudentBookings(req.body.studentEmail)
+  res.send(consultations)
+}
+
+exports.getLecturers = async (req, res) => {
+  const lecturers = await userTable.getAllLecturers()
+  res.send(lecturers)
+}
+
+exports.getAvailableStudentConsultations = async (req, res) => {
+  const consultations = await consultationTable.getStudentConsultations(req.body.studentEmail, req.body.lecturerEmail)
   res.send(consultations)
 }

@@ -37,12 +37,14 @@ mainRouter.get('/myConsultations/:id', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'myConsultations.html'))
 })
 
+// user routes
 mainRouter
   .route('/posts')
   .get(dbPosts.getAllPosts) // get all users
   .post(dbPosts.createPost) // add user
 mainRouter.route('/posts/:id').get(dbPosts.getPost).delete(dbPosts.deletePost)
 mainRouter.route('/checkLogin').post(dbPosts.checkLogin)
+mainRouter.route('/getLecturers').get(dbPosts.getLecturers)
 
 // log all actions taken
 mainRouter
@@ -54,9 +56,10 @@ mainRouter
 mainRouter.route('/addConsultation').post(dbPosts.addConsultation)
 mainRouter.route('/getConsultations').post(dbPosts.getConsultations) // get all consultations for a lecturer
 mainRouter.route('/getAllConsultations').get(dbPosts.getAllConsultations)
+mainRouter.route('/getAvailableStudentConsultations').post(dbPosts.getAvailableStudentConsultations)
 
 // booking routes
 mainRouter.route('/addBooking').post(dbPosts.addBooking)
-mainRouter.route('/getStudentConsultations').post(dbPosts.getStudentConsultations) // get all bookings for a student
+mainRouter.route('/getStudentBookings').post(dbPosts.getStudentBookings) // get all bookings for a student
 
 module.exports = mainRouter

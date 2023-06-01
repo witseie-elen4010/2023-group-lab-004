@@ -119,7 +119,7 @@ async function generateUserData () {
     return events
   }
   if (user.role === 'student') {
-    const response = await fetch('/getStudentConsultations', {
+    const response = await fetch('/getStudentBookings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -178,8 +178,8 @@ todayBtn.addEventListener('click', function () {
   currentDate = new Date()
 
   // Get the month and year of the current date
-  currentMonth = currentDate.getMonth()
-  currentDate.getFullYear()
+  const currentMonth = currentDate.getMonth()
+  currentYear = currentDate.getFullYear()
 
   // Update the calendar to the current month and year
   generateCalendar(currentMonth, currentYear)
