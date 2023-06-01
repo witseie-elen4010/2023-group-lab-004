@@ -113,7 +113,7 @@ async function generateUserData () {
       if (consultations[i].active === 0) {
         title = `CANCELLED: ${consultations[i].meeting_title} @ ${consultations[i].time.substring(0, 5)}`
       }
-      
+
       const event = {
         date: `${year}-${month}-${day}`,
         title
