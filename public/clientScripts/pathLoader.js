@@ -16,4 +16,3 @@ function loadLogin () {
   window.location.href = '/login'
 }
 
-module.exports = { loadConsult, loadDashboard, loadSignUp, loadLogin }
