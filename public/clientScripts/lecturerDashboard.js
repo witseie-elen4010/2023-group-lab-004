@@ -103,11 +103,18 @@ async function createTable () {
   tableBody.innerHTML = ''
 
   // Create new table rows
-  data.forEach((rowObj, index) => {
+  consultations.forEach((rowObj, index) => {
     const row = document.createElement('tr')
-    Object.values(rowObj).forEach(value => {
+    const properties = ['id', 'meeting_title', 'date', 'time', 'duration', 'number_of_students', 'students']
+    properties.forEach(property => {
       const cell = document.createElement('td')
-      cell.textContent = value
+      if (property === 'date') {
+        const date = new Date(rowObj[property])
+        const formattedDate = date.toISOString().split('T')[0]
+        cell.textContent = formattedDate
+      } else {
+        cell.textContent = rowObj[property]
+      }
       row.appendChild(cell)
     })
 
@@ -118,6 +125,35 @@ async function createTable () {
     cancelButton.classList.add('btn', 'btn-red')
     cancelButtonCell.appendChild(cancelButton)
     row.appendChild(cancelButtonCell)
+
+    cancelButton.addEventListener('click', (event) => {
+      event.preventDefault()
+
+      // Hide the button
+      cancelButton.style.display = 'none'
+
+      // Create a new element for the "cancelled" message
+      const cancelledMessage = document.createElement('span')
+      cancelledMessage.textContent = 'Cancelled'
+
+      // Append the "cancelled" message to the button cell
+      cancelButtonCell.appendChild(cancelledMessage)
+
+      // Access the parent row of the clicked button
+      const parentRow = cancelButton.closest('tr')
+
+      // get the consultation id
+      const consultationId = parentRow.firstChild.textContent
+
+      // set the consultation to inactive
+      fetch('/cancelConsultation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: consultationId })
+      })
+    })
 
     tableBody.appendChild(row)
   })
