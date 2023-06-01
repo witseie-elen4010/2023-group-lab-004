@@ -129,6 +129,10 @@ async function createTable () {
     tableBody.appendChild(row)
   })
 }
+document.getElementById('refreshButton').addEventListener('click', function() {
+  // Reload the page
+  location.reload();
 
+})
 // Call the function to populate the lecturer dropdown
 populateLecturerDropdown()
