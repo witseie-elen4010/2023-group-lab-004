@@ -77,3 +77,8 @@ exports.getAvailableStudentConsultations = async (req, res) => {
   const consultations = await consultationTable.getStudentConsultations(req.body.studentEmail, req.body.lecturerEmail)
   res.send(consultations)
 }
+
+exports.getDetailedConsultation = async (req, res) => {
+  const consultation = await consultationTable.getDetailedConsultation(req.body.lecturerEmail)
+  res.send(consultation)
+}
