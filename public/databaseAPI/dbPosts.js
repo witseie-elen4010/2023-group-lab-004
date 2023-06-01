@@ -82,3 +82,8 @@ exports.getDetailedConsultation = async (req, res) => {
   const consultation = await consultationTable.getDetailedConsultation(req.body.lecturerEmail)
   res.send(consultation)
 }
+
+exports.getAllEmails = async (req, res) => {
+  const emails = await userTable.getAllEmails()
+  res.send(emails)
+}
