@@ -1,8 +1,8 @@
 'use strict';
 
 const conn = require('../../db.js');
-const logTable = require('./logFunctions.js');
-const bookingTable = require('./bookingsFunctions.js');
+const logTable = require('../databaseAPI/logFunctions.js');
+const bookingTable = require('../databaseAPI/bookingsFunctions.js');
 
 // Mock the console.log function
 console.log = jest.fn();
