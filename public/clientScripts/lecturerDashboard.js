@@ -83,7 +83,20 @@ const data = [
 ]
 
 // Function to create and populate the table
-function createTable () {
+async function createTable () {
+  // get consultation data from database
+  const url = window.location.href
+  const lecturerEmail = url.substring(url.lastIndexOf('/') + 1)
+  const result = await fetch('/getDetailedConsultation', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ lecturerEmail })
+  })
+  const consultations = await result.json()
+  console.log(consultations)
+
   const tableBody = document.getElementById('tableBody')
 
   // Clear existing table rows
