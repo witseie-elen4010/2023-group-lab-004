@@ -157,4 +157,16 @@ async function createTable () {
   })
 }
 
+document.getElementById('refreshButton1').addEventListener('click', function() {
+  // Reload the page
+  location.reload();
+
+})
+
+document.getElementById('refreshButton2').addEventListener('click', function() {
+  // Reload the page
+  location.reload();
+
+})
+
 createTable()
