@@ -3,7 +3,7 @@
 A meeting with the group members of Calendr. on the 11/05/2023
 
 In sprint 1, 6 developer level stories were completed.
-Sprint velocity:
+
 
 What went well?
 

@@ -1,9 +1,8 @@
 ### Sprint 3 retrospective
 
-A meeting with the group members of Calendr. on the 11/05/2023
+A meeting with the group members of Calendr. on the 16/05/2023
 
 In sprint 3, 7 developer level stories were completed.
-Sprint velocity:
 
 What went well?
 
