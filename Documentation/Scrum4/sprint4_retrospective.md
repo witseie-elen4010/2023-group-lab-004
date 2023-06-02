@@ -8,6 +8,8 @@ What went well?
 1. The database was successfully connected to the project and behaved as expected. 
 2. Date issues arising from conflict between time zones was resolved.
 3. The website has a constistent colour scheme throughout.
+4. Cohesion and effective teamwork.
+5. Efficient splitting of tasks among team members.
 
 
 What went wrong?
@@ -18,5 +20,5 @@ What went wrong?
 
 What could be improved?
 1. The naming of certain functions could be improved to make finding and fixing errors easier.
-
-
+2. Testing code in smaller chunks to make debugging easier.
+3. A saftey measure or process could be implemented to prevent last minute errors.
