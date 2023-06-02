@@ -1,4 +1,4 @@
-### Sprint 3 retrospective
+### Sprint 4 retrospective
 
 A meeting with the group members of Calendr. on the 02/06/2023
 
